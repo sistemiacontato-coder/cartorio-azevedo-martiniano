@@ -431,7 +431,7 @@ function salvarUsuario(usuarioIdOriginal) {
 function copiarAcesso(usuarioId) {
   const u = getUsuarios().find(x => x.usuario === usuarioId);
   if (!u) return;
-  const texto = `Usuário: ${u.usuario}\nSite: SistemIA.com.br/AzevedoMartiniano\nLogin: ${u.email}\nSenha: ${u.senha}`;
+  const texto = `Usuário: ${u.nome}\nSite: SistemIA.com.br/AzevedoMartiniano\nLogin: ${u.email}\nSenha: ${u.senha}`;
 
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(texto)
