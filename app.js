@@ -187,14 +187,6 @@ function renderHeaderBadge() {
       <span class="font-label-md text-label-md text-on-surface">${nome}</span>
     </div>`;
 
-  // Sidebar
-  const sidebarInfo = document.getElementById('sidebar-user-info');
-  if (sidebarInfo) sidebarInfo.innerHTML = `
-    <div class="w-9 h-9 rounded-full bg-primary-container text-inverse-primary flex items-center justify-center font-label-md text-label-md font-bold shrink-0">${iniciais}</div>
-    <div class="min-w-0">
-      <p class="font-label-md text-label-md text-on-surface truncate">${nome}</p>
-      ${roleBadge ? `<div class="mt-0.5">${roleBadge}</div>` : ''}
-    </div>`;
 }
 
 // --- NAVEGAÇÃO ---
@@ -284,8 +276,6 @@ function tutoriaisView() {
   const concluidas = aulas.filter(a=>a.concluida).length;
   const pct = aulas.length ? Math.round(concluidas/aulas.length*100) : 0;
   return `
-  <div class="mb-10"><h1 class="font-headline-xl text-headline-xl text-primary mb-2">Trilhas de Aprendizagem</h1>
-  <p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Continue seu desenvolvimento profissional com nossos módulos especializados.</p></div>
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
     <div class="lg:col-span-2 space-y-6">
       <div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden">
