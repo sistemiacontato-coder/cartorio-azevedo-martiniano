@@ -171,12 +171,30 @@ function renderMobileNav() {
 }
 
 function renderHeaderBadge() {
+  const nome = localStorage.getItem('userName') || 'Usuário';
+  const iniciais = nome.split(' ').slice(0, 2).map(p => p[0].toUpperCase()).join('');
+
+  let roleBadge = '';
+  if (isMaster())          roleBadge = '<span class="badge-master"><span class="material-symbols-outlined" style="font-size:14px">shield_person</span>MASTER</span>';
+  else if (isAdministrador()) roleBadge = '<span class="badge-admin"><span class="material-symbols-outlined" style="font-size:14px">manage_accounts</span>ADMIN</span>';
+
+  // Header desktop
   const badge = document.getElementById('header-user-badge');
-  if (isMaster()) {
-    badge.innerHTML = '<span class="badge-master"><span class="material-symbols-outlined" style="font-size:14px">shield_person</span>MASTER</span>';
-  } else if (isAdministrador()) {
-    badge.innerHTML = '<span class="badge-admin"><span class="material-symbols-outlined" style="font-size:14px">manage_accounts</span>ADMIN</span>';
-  }
+  if (badge) badge.innerHTML = `
+    <div class="flex items-center gap-2">
+      ${roleBadge}
+      <div class="w-8 h-8 rounded-full bg-primary-container text-inverse-primary flex items-center justify-center font-label-md text-label-md font-bold text-sm">${iniciais}</div>
+      <span class="font-label-md text-label-md text-on-surface">${nome}</span>
+    </div>`;
+
+  // Sidebar
+  const sidebarInfo = document.getElementById('sidebar-user-info');
+  if (sidebarInfo) sidebarInfo.innerHTML = `
+    <div class="w-9 h-9 rounded-full bg-primary-container text-inverse-primary flex items-center justify-center font-label-md text-label-md font-bold shrink-0">${iniciais}</div>
+    <div class="min-w-0">
+      <p class="font-label-md text-label-md text-on-surface truncate">${nome}</p>
+      ${roleBadge ? `<div class="mt-0.5">${roleBadge}</div>` : ''}
+    </div>`;
 }
 
 // --- NAVEGAÇÃO ---
