@@ -76,9 +76,9 @@ function adminView() {
       </button>
     </div>
     <div class="space-y-3" id="admin-usuarios-list">
-      ${getUsuarios().map(u => usuarioAdminRow(u)).join('')}
+      ${getUsuariosVisiveis().map(u => usuarioAdminRow(u)).join('')}
     </div>
-    ${getUsuarios().length === 0 ? '<p class="text-on-surface-variant font-body-md py-4 text-center">Nenhum usuário cadastrado.</p>' : ''}
+    ${getUsuariosVisiveis().length === 0 ? '<p class="text-on-surface-variant font-body-md py-4 text-center">Nenhum usuário cadastrado.</p>' : ''}
   </div>
 
   <!-- RELATÓRIO DE VISUALIZAÇÕES -->
@@ -162,6 +162,10 @@ function getUsuarios() {
 }
 function setUsuarios(lista) {
   localStorage.setItem('cartorio_users', JSON.stringify(lista));
+}
+// Retorna apenas os usuários que o papel atual pode visualizar
+function getUsuariosVisiveis() {
+  return isMaster() ? getUsuarios() : getUsuarios().filter(u => u.role !== 'master');
 }
 
 function usuarioAdminRow(u) {
@@ -461,7 +465,8 @@ async function atualizarListaUsuarios() {
   if (!lista || lista.length === 0) return;
   localStorage.setItem('cartorio_users', JSON.stringify(lista));
   const container = document.getElementById('admin-usuarios-list');
-  if (container) container.innerHTML = lista.map(u => usuarioAdminRow(u)).join('');
+  const listaVisivel = isMaster() ? lista : lista.filter(u => u.role !== 'master');
+  if (container) container.innerHTML = listaVisivel.map(u => usuarioAdminRow(u)).join('');
 }
 
 // --- RELATÓRIO DE VISUALIZAÇÕES ---
