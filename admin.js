@@ -104,10 +104,19 @@ function adminView() {
       <span class="material-symbols-outlined">warning</span>Zona de Perigo
     </h2>
     <p class="font-body-md text-body-md text-on-surface-variant mb-4">Restaurar todos os dados para o padrão original. Esta ação não pode ser desfeita.</p>
-    <button onclick="if(confirm('Tem certeza? Todos os dados serão restaurados ao padrão.')){localStorage.removeItem('cartorio_data');reloadApp();navigateTo('admin');}" class="px-6 py-2.5 border border-error text-error font-label-md text-label-md rounded hover:bg-error hover:text-on-error transition-colors">
+    <button onclick="restaurarPadrao()" class="px-6 py-2.5 border border-error text-error font-label-md text-label-md rounded hover:bg-error hover:text-on-error transition-colors">
       Restaurar Padrão
     </button>
   </div>` : ''}`;
+}
+
+// --- ZONA DE PERIGO ---
+function restaurarPadrao() {
+  if (!confirm('Tem certeza? Os vídeos e materiais serão restaurados ao padrão original.')) return;
+  localStorage.removeItem('cartorio_data');
+  reloadApp();
+  navigateTo('admin');
+  mostrarToast('Dados restaurados ao padrão.');
 }
 
 // --- COMPONENTES ADMIN ---
