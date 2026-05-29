@@ -363,9 +363,9 @@ function abrirModalUsuario(usuarioId) {
       </div></div>
       <div><label class="block font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Tipo de acesso</label>
       <select id="u_role" ${isMasterUser ? 'disabled' : ''} class="w-full border border-outline-variant rounded px-4 py-3 font-body-md text-body-md focus:border-primary outline-none disabled:opacity-50">
-        <option value="membro"         ${!u || u.role === 'membro'         ? 'selected' : ''}>Membro</option>
-        <option value="administrador"  ${u && u.role === 'administrador'   ? 'selected' : ''}>Administrador</option>
-        <option value="master"         ${u && u.role === 'master'          ? 'selected' : ''}>Master</option>
+        <option value="membro"        ${!u || u.role === 'membro'        ? 'selected' : ''}>Membro</option>
+        <option value="administrador" ${u && u.role === 'administrador'  ? 'selected' : ''}>Administrador</option>
+        ${isMaster() ? `<option value="master" ${u && u.role === 'master' ? 'selected' : ''}>Master</option>` : ''}
       </select></div>
       <div class="flex gap-3 pt-2">
         <button type="submit" class="flex-1 py-2.5 bg-primary text-on-primary font-label-md text-label-md rounded hover:bg-inverse-surface transition-colors">Salvar</button>
