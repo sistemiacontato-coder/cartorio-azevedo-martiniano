@@ -27,6 +27,12 @@ const DADOS_PADRAO = {
   ]
 };
 
+// Monta URL de embed do Vimeo sem duplicar o "?"
+function vimeoSrc(url, autoplay) {
+  const sep = url.includes('?') ? '&' : '?';
+  return url + sep + 'title=0&byline=0&portrait=0' + (autoplay ? '&autoplay=1' : '');
+}
+
 // --- STORAGE ---
 const DATA_VERSION = 2; // incrementar quando os dados padrão mudarem
 function getData() {
@@ -133,11 +139,11 @@ function navigateTo(page) {
       ? data.tutoriais.find(a => a.id === _aulaAtivaId)
       : (data.tutoriais.find(a => !a.concluida) || data.tutoriais[0]);
     const player = document.getElementById('vimeo-player');
-    if (player && aula) player.src = aula.url + '?title=0&byline=0&portrait=0';
+    if (player && aula) player.src = vimeoSrc(aula.url, false);
   } else if (page === 'home') {
     const primeiro = data.tutoriais[0];
     const homeIframe = document.querySelector('#view-home iframe');
-    if (homeIframe && primeiro) homeIframe.src = primeiro.url + '?title=0&byline=0&portrait=0';
+    if (homeIframe && primeiro) homeIframe.src = vimeoSrc(primeiro.url, false);
   }
 
   document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
@@ -176,7 +182,7 @@ function homeView() {
     <div class="lg:col-span-2 bg-surface-container-lowest border border-outline-variant rounded p-4 md:p-6 flex flex-col card-hover">
       <div class="mb-4"><span class="inline-block bg-primary-container text-inverse-primary px-3 py-1 rounded font-label-sm text-label-sm mb-3">Módulo em Destaque</span>
       <h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">${primeiro?primeiro.titulo:'Sem aulas'}</h2></div>
-      <div class="video-wrapper border border-outline-variant">${primeiro?`<iframe src="${primeiro.url}?title=0&byline=0&portrait=0" allow="autoplay;fullscreen;picture-in-picture" allowfullscreen></iframe>`:''}</div>
+      <div class="video-wrapper border border-outline-variant">${primeiro?`<iframe src="${vimeoSrc(primeiro.url,false)}" allow="autoplay;fullscreen;picture-in-picture" allowfullscreen></iframe>`:''}</div>
     </div>
     <div class="flex flex-col gap-gutter">
       <div class="bg-surface-container-lowest border border-outline-variant rounded p-6 border-t-4 border-t-secondary">
@@ -209,7 +215,7 @@ function tutoriaisView() {
   <div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
     <div class="lg:col-span-2 space-y-6">
       <div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden">
-        <div class="video-wrapper"><iframe id="vimeo-player" src="${ativa?ativa.url+'?title=0&byline=0&portrait=0':''}" allow="autoplay;fullscreen;picture-in-picture" allowfullscreen></iframe></div>
+        <div class="video-wrapper"><iframe id="vimeo-player" src="${ativa?vimeoSrc(ativa.url,false):''}" allow="autoplay;fullscreen;picture-in-picture" allowfullscreen></iframe></div>
         <div class="p-6">
           <h2 id="current-lesson-title" class="font-headline-lg text-headline-lg text-primary mb-4">${ativa?ativa.titulo:''}</h2>
           <button class="inline-flex items-center gap-2 px-5 py-2.5 border border-secondary text-secondary font-label-md text-label-md rounded hover:bg-secondary hover:text-on-secondary transition-colors">
@@ -243,7 +249,7 @@ function selectLesson(id) {
   const aula = data.tutoriais.find(a=>a.id===id);
   if (!aula) return;
   _aulaAtivaId = id;
-  document.getElementById('vimeo-player').src = aula.url+'?title=0&byline=0&portrait=0&autoplay=1';
+  document.getElementById('vimeo-player').src = vimeoSrc(aula.url, true);
   document.getElementById('current-lesson-title').textContent = aula.titulo;
   const email = localStorage.getItem('userEmail');
   if (email) registrarVisualizacao(email, aula.id, aula.titulo);
