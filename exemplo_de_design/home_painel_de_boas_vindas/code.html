@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Dashboard - Área de Membros</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary-container": "#0a2342",
+                    "inverse-primary": "#b2c7ef",
+                    "error": "#ba1a1a",
+                    "surface-variant": "#d8e3fa",
+                    "surface": "#f9f9ff",
+                    "background": "#f9f9ff",
+                    "surface-container-highest": "#d8e3fa",
+                    "secondary-container": "#fed488",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed": "#261900",
+                    "secondary-fixed-dim": "#e9c176",
+                    "on-primary-fixed-variant": "#324768",
+                    "on-tertiary-fixed": "#191c1d",
+                    "on-secondary-fixed-variant": "#5d4201",
+                    "secondary-fixed": "#ffdea5",
+                    "on-primary": "#ffffff",
+                    "on-primary-container": "#768baf",
+                    "tertiary-fixed-dim": "#c5c7c8",
+                    "on-primary-fixed": "#021c3a",
+                    "on-error-container": "#93000a",
+                    "primary-fixed": "#d5e3ff",
+                    "tertiary": "#0a0d0e",
+                    "on-secondary-container": "#785a1a",
+                    "inverse-surface": "#263142",
+                    "on-surface-variant": "#44474e",
+                    "surface-bright": "#f9f9ff",
+                    "surface-container-low": "#f0f3ff",
+                    "surface-tint": "#4a5f81",
+                    "outline": "#74777e",
+                    "inverse-on-surface": "#ebf1ff",
+                    "on-tertiary": "#ffffff",
+                    "surface-dim": "#cfdaf1",
+                    "tertiary-fixed": "#e1e3e4",
+                    "surface-container-lowest": "#ffffff",
+                    "on-background": "#111c2c",
+                    "primary": "#000d22",
+                    "secondary": "#775a19",
+                    "surface-container-high": "#dee8ff",
+                    "on-tertiary-fixed-variant": "#454748",
+                    "surface-container": "#e7eeff",
+                    "tertiary-container": "#202324",
+                    "on-tertiary-container": "#888a8b",
+                    "on-error": "#ffffff",
+                    "on-secondary": "#ffffff",
+                    "primary-fixed-dim": "#b2c7ef",
+                    "outline-variant": "#c4c6cf",
+                    "on-surface": "#111c2c"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "unit": "8px",
+                    "container-max": "1280px",
+                    "margin-mobile": "16px",
+                    "margin-desktop": "40px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "label-sm": ["Inter"],
+                    "headline-lg": ["Manrope"],
+                    "headline-md": ["Manrope"],
+                    "body-lg": ["Inter"],
+                    "headline-lg-mobile": ["Manrope"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-xl": ["Manrope"]
+            },
+            "fontSize": {
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md flex">
+<!-- JSON Component: SideNavBar -->
+<aside class="bg-surface dark:bg-surface text-primary dark:text-inverse-primary h-screen w-72 flex flex-col fixed left-0 top-0 border-r border-outline-variant dark:border-outline hidden md:flex z-50">
+<div class="flex flex-col h-full py-8">
+<!-- Profile/Header Area -->
+<div class="px-8 mb-10 flex flex-col items-center text-center">
+<img alt="Foto de perfil do usuário" class="w-20 h-20 rounded-full mb-4 shadow-sm border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZWQ7r0-m7sia4l5YBGt-v2KAwSvUs2gh8J6iy2JFTlIC92LEHiKapljg9w34S5QI3FOen1BuAF3vazQ0jAuBBCRQRJ3UsuIj9BL64QZpAs3RZvle94WSjt03v2I2KbKZ_TrV2bhRnRaxjev61uUxYefd4QIEG9ys2NK8gNzksPIZZE4rP-vlFk0ZOUJfKbbTUi3Di2u6gIm_UuB4ffuPrZ2qoUf6p4nNVl_Ov220KvYXZdTy7qv1gemGcWCNDDmKrP8FyYrqCay4n"/>
+<h2 class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary">Azevedo Martiniano</h2>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1 tracking-wide">Área de Membros</p>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 flex flex-col gap-2">
+<!-- Active Item: Home -->
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed border-l-4 border-secondary font-label-md text-label-md bg-surface-container-low scale-[0.98] transition-transform ml-4 rounded-l-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+                    Home
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:border-secondary transition-all duration-200 hover:text-secondary border-l-4 border-transparent ml-4 rounded-l-lg" href="#">
+<span class="material-symbols-outlined">school</span>
+                    Tutoriais
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:border-secondary transition-all duration-200 hover:text-secondary border-l-4 border-transparent ml-4 rounded-l-lg" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+                    Materiais de Apoio
+                </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:border-secondary transition-all duration-200 hover:text-secondary border-l-4 border-transparent ml-4 rounded-l-lg" href="#">
+<span class="material-symbols-outlined">help_center</span>
+                    Suporte
+                </a>
+</nav>
+<!-- Bottom Area -->
+<div class="px-8 mt-auto flex flex-col gap-4">
+<button class="w-full py-3 bg-transparent border border-secondary text-secondary font-label-md text-label-md rounded hover:bg-secondary-container hover:text-on-secondary-container transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-sm">workspace_premium</span>
+                    Ver Certificado
+                </button>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:text-error transition-colors mt-4" href="#">
+<span class="material-symbols-outlined">logout</span>
+                    Sair
+                </a>
+</div>
+</div>
+</aside>
+<!-- Main Content Wrapper -->
+<div class="flex-1 flex flex-col md:ml-72 min-w-0">
+<!-- JSON Component: TopNavBar -->
+<header class="bg-surface dark:bg-surface text-primary dark:text-inverse-primary docked full-width top-0 sticky z-40 border-b border-outline-variant dark:border-outline hidden md:flex justify-between items-center w-full px-10 h-20 max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary tracking-tight">
+                Cartório Azevedo Martiniano
+            </div>
+<div class="flex items-center gap-10">
+<nav class="flex gap-8">
+<a class="text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:text-secondary transition-colors duration-200" href="#">Meus Cursos</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:text-secondary transition-colors duration-200" href="#">Progresso</a>
+</nav>
+<div class="flex items-center gap-5 pl-8 border-l border-outline-variant">
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">search</span></button>
+<button class="text-on-surface-variant hover:text-primary transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 w-2 h-2 bg-secondary rounded-full"></span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors"><span class="material-symbols-outlined">settings</span></button>
+<img alt="Avatar do Aluno" class="w-9 h-9 rounded-full ml-2 border border-outline-variant cursor-pointer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB012uaPaIrzZavchGyp_ORvN4LOhR0_2HSYF8jzlNteTma4ERYP8px1lB6Al3WGP4rO635X0XZGl0lpCMeUccRrCFWWaMOmSHgZQsYHxZhGtanMRYO_wJ-SUO0HfHtaxKNAAsMuz59hLyXC1TIhxducDsbI96kVwjhhhjmt14s3UEWFVTP8jwTX0QUgHrKvhg8ZZDogcVuI4dLfBnkzxvlK4Rhzkb4IPPxcLPugGhhECot8kJrs4mq-Ex6xiN8MZUP8ApB85kEldBd"/>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="flex-1 px-margin-mobile md:px-margin-desktop py-8 md:py-12 max-w-container-max w-full mx-auto">
+<!-- Greeting Section -->
+<section class="mb-12">
+<h1 class="font-headline-xl text-headline-xl text-primary mb-3">Bem-vindo, Alexandre!</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Continue sua jornada de capacitação. Abaixo você encontra as últimas atualizações normativas e o progresso do seu treinamento notarial.</p>
+</section>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter mb-16">
+<!-- Featured Video Panel (Span 2) -->
+<div class="lg:col-span-2 bg-surface-container-lowest border border-outline-variant rounded p-2 md:p-6 flex flex-col group hover:border-secondary transition-colors duration-300 relative overflow-hidden">
+<div class="p-4 md:p-0 flex justify-between items-start mb-4 md:mb-6 z-10">
+<div>
+<span class="inline-block bg-primary-container text-inverse-primary px-3 py-1 rounded font-label-sm text-label-sm mb-3">Módulo em Destaque</span>
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-headline-lg-mobile md:text-headline-lg text-primary">Visão Geral: Novo Provimento</h2>
+</div>
+</div>
+<!-- Video Placeholder -->
+<div class="relative w-full aspect-video rounded overflow-hidden bg-surface-variant group-hover:shadow-[0_10px_25px_-5px_rgba(10,35,66,0.05)] transition-shadow duration-300 border border-outline-variant">
+<div class="absolute inset-0 bg-cover bg-center" data-alt="A bright, modern corporate office environment emphasizing legal professionalism. A sleek wooden desk holds structured legal documents and a closed laptop. Natural, diffused light pours in from large out-of-frame windows, creating a clean, white-toned institutional aesthetic with very subtle, elegant gold pen accents resting on the papers. The mood is authoritative yet accessible." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD4dvMD8Un7lnK7M16kd-RxQXjx9EbjiRXQOQAxMWKff0PhG5rgLhRksNgbaN8uUOD7dO0twl3vS3e2002HmJGF6eP43gFtquz7I1BXMHBcPnX2_YN7YzO59mshU6vWwF_wiJYwqy1CyEAE-byrG0OH_wBkFaC545SykWGnaAuwESg_Qd02TgwQXDlUzr-a4PAneKo-H3imAB7NZ2446UuIQYzh2QyLGmpr859RdG6cNevhHgGElxwJOoglXU24iwZoXt3uEk9NbsTV')"></div>
+<div class="absolute inset-0 bg-primary/20 group-hover:bg-primary/10 transition-colors duration-300"></div>
+<!-- Play Button Overlay -->
+<button class="absolute inset-0 m-auto w-16 h-16 md:w-20 md:h-20 bg-surface-container-lowest/90 backdrop-blur-sm rounded-full flex items-center justify-center text-primary hover:scale-105 transition-transform shadow-lg border border-white/20">
+<span class="material-symbols-outlined text-4xl md:text-5xl ml-1" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</button>
+<div class="absolute bottom-4 right-4 bg-primary text-on-primary px-3 py-1.5 rounded font-label-sm text-label-sm tracking-wider">12:45</div>
+</div>
+</div>
+<!-- Stats & Status Stack (Span 1) -->
+<div class="flex flex-col gap-gutter">
+<!-- Progress Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-6 border-t-4 border-t-secondary relative overflow-hidden flex flex-col justify-between">
+<div>
+<h3 class="font-headline-md text-headline-md text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">trending_up</span>
+                                Seu Progresso
+                            </h3>
+<div class="flex items-center justify-between mb-2">
+<span class="font-label-md text-label-md text-on-surface-variant truncate pr-4">Módulo de Atendimento</span>
+<span class="font-label-md text-label-md text-primary font-bold">60%</span>
+</div>
+<!-- Progress Bar -->
+<div class="h-1.5 w-full bg-surface-variant rounded-full overflow-hidden mb-8">
+<div class="h-full bg-secondary w-[60%] rounded-full relative">
+<div class="absolute right-0 top-0 bottom-0 w-4 bg-white/20"></div>
+</div>
+</div>
+</div>
+<button class="w-full py-2.5 bg-primary text-on-primary font-label-md text-label-md rounded hover:bg-inverse-surface transition-colors">Continuar Aula</button>
+</div>
+<!-- Quick Alerts -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-6 hover:border-secondary transition-colors duration-300 flex-1 flex flex-col">
+<h3 class="font-label-md text-label-md text-on-surface-variant mb-5 uppercase tracking-wider border-b border-outline-variant pb-2">Avisos Recentes</h3>
+<ul class="flex flex-col gap-5 flex-1 justify-center">
+<li class="flex gap-4 items-start">
+<div class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary text-sm">campaign</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary mb-1">Manutenção Programada</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm leading-snug">O sistema ficará indisponível amanhã das 02h às 04h.</p>
+</div>
+</li>
+<li class="flex gap-4 items-start">
+<div class="w-8 h-8 rounded-full bg-surface-container-low flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary text-sm">library_books</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-primary mb-1">Novas Apostilas</p>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm leading-snug">Material de apoio sobre Direito de Família atualizado no acervo.</p>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<!-- Section: Latest Tutorials -->
+<section>
+<div class="flex justify-between items-end mb-8 border-b border-outline-variant pb-4">
+<h2 class="font-headline-lg text-headline-lg text-primary">Últimos Tutoriais</h2>
+<a class="font-label-md text-label-md text-secondary hover:underline flex items-center gap-1" href="#">Ver acervo completo <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
+<!-- Tutorial Card 1 -->
+<a class="block bg-surface-container-lowest border border-outline-variant rounded p-6 hover:border-secondary transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_25px_-5px_rgba(10,35,66,0.05)] group" href="#">
+<div class="flex items-start justify-between mb-6">
+<div class="w-12 h-12 bg-surface-container-low text-primary flex items-center justify-center rounded border border-outline-variant group-hover:border-secondary/30 transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assignment_turned_in</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface px-2 py-1 rounded">10 min</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-3">Autenticação de Documentos Digitais</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2 h-12">Passo a passo sobre os procedimentos de validação e registro seguro em sistema integrado.</p>
+<div class="text-secondary font-label-md text-label-md flex items-center gap-2">
+                            Acessar Material <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
+</div>
+</a>
+<!-- Tutorial Card 2 -->
+<a class="block bg-surface-container-lowest border border-outline-variant rounded p-6 hover:border-secondary transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_25px_-5px_rgba(10,35,66,0.05)] group" href="#">
+<div class="flex items-start justify-between mb-6">
+<div class="w-12 h-12 bg-surface-container-low text-primary flex items-center justify-center rounded border border-outline-variant group-hover:border-secondary/30 transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">manage_accounts</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface px-2 py-1 rounded">15 min</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-3">Procedimentos de Triagem</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2 h-12">Boas práticas para atendimento inicial, análise prévia e encaminhamento eficiente de protocolos.</p>
+<div class="text-secondary font-label-md text-label-md flex items-center gap-2">
+                            Acessar Material <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
+</div>
+</a>
+<!-- Tutorial Card 3 -->
+<a class="block bg-surface-container-lowest border border-outline-variant rounded p-6 hover:border-secondary transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_10px_25px_-5px_rgba(10,35,66,0.05)] group" href="#">
+<div class="flex items-start justify-between mb-6">
+<div class="w-12 h-12 bg-surface-container-low text-primary flex items-center justify-center rounded border border-outline-variant group-hover:border-secondary/30 transition-colors">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">gavel</span>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface px-2 py-1 rounded">Leitura</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-3">Glossário Jurídico Básico</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-6 line-clamp-2 h-12">Dicionário de termos essenciais e jargões recorrentes no dia a dia do colaborador notarial.</p>
+<div class="text-secondary font-label-md text-label-md flex items-center gap-2">
+                            Acessar Material <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_right_alt</span>
+</div>
+</a>
+</div>
+</section>
+</main>
+</div>
+<!-- Mobile Bottom Navigation (Visible only on mobile) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container-lowest border-t border-outline-variant z-50 px-6 py-3 flex justify-between items-center shadow-[0_-10px_25px_-5px_rgba(10,35,66,0.05)] pb-safe">
+<a class="flex flex-col items-center gap-1 text-secondary font-label-sm text-label-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+            Home
+        </a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">school</span>
+            Tutoriais
+        </a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+            Materiais
+        </a>
+<a class="flex flex-col items-center gap-1 text-on-surface-variant font-label-sm text-label-sm hover:text-primary transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+            Perfil
+        </a>
+</nav>
+<!-- Support safe area for modern mobile browsers -->
+<style>
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 16px); }
+    </style>
+</body></html>

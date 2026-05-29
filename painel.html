@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Área de Membros - Cartório Azevedo Martiniano</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link rel="stylesheet" href="styles.css"/>
+<script src="tailwind.config.js"></script>
+</head>
+<body class="bg-background text-on-background min-h-screen font-body-md flex antialiased">
+
+<!-- SIDEBAR -->
+<aside id="sidebar" class="bg-surface h-screen w-72 flex-col fixed left-0 top-0 border-r border-outline-variant py-8 z-50 hidden md:flex">
+  <div class="px-6 mb-10 flex flex-col items-center text-center">
+    <div class="w-20 h-20 rounded-full overflow-hidden mb-4 border-2 border-outline-variant shadow-sm">
+      <img alt="Logo Cartório" class="w-full h-full object-cover" src="exemplo_de_design/logo-cartorio-azevedo-martiniano.jpg"/>
+    </div>
+    <h2 class="font-headline-md text-headline-md font-bold text-primary">Azevedo Martiniano</h2>
+    <p class="font-label-md text-label-md text-on-surface-variant mt-1 tracking-wide">Área de Membros</p>
+  </div>
+  <!-- Nav renderizada dinamicamente pelo JS -->
+  <nav class="flex-1 flex flex-col gap-1" id="sidebar-nav"></nav>
+  <div class="px-6 mt-auto flex flex-col gap-4">
+    <a href="https://sistemIA.com.br/Acesso" target="_blank" rel="noopener" class="w-full py-2.5 bg-primary text-on-primary font-label-md text-label-md rounded hover:bg-inverse-surface transition-colors flex items-center justify-center gap-2">
+      <span class="material-symbols-outlined text-sm">open_in_new</span>Acessar Sistema
+    </a>
+    <button id="btn-certificado" class="w-full py-2.5 bg-transparent border border-secondary text-secondary font-label-md text-label-md rounded hover:bg-secondary-container hover:text-on-secondary-container transition-colors flex items-center justify-center gap-2">
+      <span class="material-symbols-outlined text-sm">workspace_premium</span>Ver Certificado
+    </button>
+    <a href="index.html" onclick="localStorage.removeItem('userRole');localStorage.removeItem('userEmail');localStorage.removeItem('userName')" class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-label-md text-label-md hover:text-error transition-colors">
+      <span class="material-symbols-outlined">logout</span>Sair
+    </a>
+  </div>
+</aside>
+
+<!-- CONTEÚDO PRINCIPAL -->
+<div class="flex-1 flex flex-col md:ml-72 min-w-0">
+  <!-- HEADER DESKTOP -->
+  <header class="bg-surface sticky top-0 z-40 border-b border-outline-variant hidden md:flex justify-between items-center w-full px-10 h-20">
+    <div class="font-headline-md text-headline-md font-bold text-primary tracking-tight">Cartório Azevedo Martiniano</div>
+    <div id="header-user-badge" class="flex items-center gap-3">
+      <!-- Badge do usuário master aparece aqui via JS -->
+    </div>
+  </header>
+
+  <!-- MOBILE HEADER -->
+  <header class="md:hidden bg-surface sticky top-0 z-40 border-b border-outline-variant flex items-center justify-between px-4 h-16">
+    <div class="flex items-center gap-3">
+      <div class="w-8 h-8 rounded-full overflow-hidden"><img src="exemplo_de_design/logo-cartorio-azevedo-martiniano.jpg" alt="Logo" class="w-full h-full object-cover"/></div>
+      <span class="font-label-md text-label-md text-primary font-bold">Azevedo Martiniano</span>
+    </div>
+  </header>
+
+  <!-- VIEWS -->
+  <main class="flex-1 px-margin-mobile md:px-margin-desktop py-8 md:py-12 max-w-container-max w-full mx-auto">
+    <div id="view-home"></div>
+    <div id="view-tutoriais" class="hidden"></div>
+    <div id="view-materiais" class="hidden"></div>
+    <div id="view-suporte" class="hidden"></div>
+    <div id="view-admin" class="hidden"></div>
+  </main>
+</div>
+
+<!-- MOBILE BOTTOM NAV -->
+<nav id="mobile-nav" class="md:hidden fixed bottom-0 left-0 w-full bg-surface-container-lowest border-t border-outline-variant z-50 px-4 py-3 flex justify-around items-center shadow-[0_-10px_25px_-5px_rgba(10,35,66,0.05)]" style="padding-bottom:env(safe-area-inset-bottom,16px);"></nav>
+
+<!-- MODAL OVERLAY (para edição) -->
+<div id="modal-overlay" class="fixed inset-0 bg-primary/40 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4">
+  <div id="modal-content" class="bg-surface-container-lowest border border-outline-variant rounded-lg p-6 md:p-8 w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-[0_10px_25px_-5px_rgba(10,35,66,0.1)]"></div>
+</div>
+
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js"></script>
+<script src="admin.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

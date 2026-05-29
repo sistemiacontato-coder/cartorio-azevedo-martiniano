@@ -1,0 +1,84 @@
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* Sidebar nav states */
+.nav-link { color: #44474e; border-left: 4px solid transparent; }
+.nav-link:hover { color: #775a19; border-left-color: #775a19; }
+.nav-link.active {
+  color: #775a19; border-left-color: #775a19;
+  background: #f0f3ff; transform: scale(0.98);
+}
+.nav-link.active .nav-icon { font-variation-settings: 'FILL' 1; }
+
+.mobile-nav-link { color: #44474e; }
+.mobile-nav-link.active { color: #775a19; }
+.mobile-nav-link.active .nav-icon { font-variation-settings: 'FILL' 1; }
+
+/* Animações */
+@keyframes fadeIn { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+.fade-in { animation: fadeIn 0.4s ease forwards; }
+
+/* FAQ accordion */
+.faq-content { max-height:0; overflow:hidden; transition:max-height 0.3s ease-out; }
+.faq-item.active .faq-content { max-height:500px; }
+.faq-item.active .faq-icon { transform:rotate(180deg); }
+.faq-icon { transition:transform 0.3s ease; }
+
+/* Progress bar animation */
+@keyframes progressFill { from{width:0} to{width:var(--progress)} }
+.progress-animated { animation: progressFill 1s ease-out forwards; }
+
+/* Video player responsivo */
+.video-wrapper { position:relative; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:4px; }
+.video-wrapper iframe { position:absolute; top:0; left:0; width:100%; height:100%; border:0; }
+
+/* Card hover sutil */
+.card-hover { transition: all 0.3s ease; }
+.card-hover:hover { border-color: #775a19; transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(10,35,66,0.05); }
+
+/* Toggle switch customizado */
+.toggle-switch { position:relative; width:44px; height:24px; display:inline-block; }
+.toggle-switch input { opacity:0; width:0; height:0; }
+.toggle-slider {
+  position:absolute; cursor:pointer; inset:0;
+  background:#c4c6cf; border-radius:24px; transition:0.3s;
+}
+.toggle-slider::before {
+  content:''; position:absolute; height:18px; width:18px;
+  left:3px; bottom:3px; background:white; border-radius:50%; transition:0.3s;
+}
+.toggle-switch input:checked + .toggle-slider { background:#775a19; }
+.toggle-switch input:checked + .toggle-slider::before { transform:translateX(20px); }
+
+/* Admin cards */
+.admin-card {
+  background: white; border: 1px solid #c4c6cf; border-radius: 4px;
+  padding: 24px; transition: all 0.2s;
+}
+.admin-card:hover { border-color: #775a19; }
+
+/* Admin item row */
+.admin-item {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 12px 16px; border: 1px solid #c4c6cf; border-radius: 4px;
+  background: #f9f9ff; transition: all 0.2s; gap: 12px;
+}
+.admin-item:hover { border-color: #775a19; background: #f0f3ff; }
+
+/* Spinner relatório */
+@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+/* Badge master */
+.badge-master {
+  display:inline-flex; align-items:center; gap:4px;
+  background:#0a2342; color:#b2c7ef; padding:4px 12px;
+  border-radius:4px; font-size:12px; font-weight:600; letter-spacing:0.05em;
+}
+
+/* Badge admin */
+.badge-admin {
+  display:inline-flex; align-items:center; gap:4px;
+  background:#775a19; color:#fff8ec; padding:4px 12px;
+  border-radius:4px; font-size:12px; font-weight:600; letter-spacing:0.05em;
+}

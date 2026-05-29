@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Suporte - Cartório Azevedo Martiniano</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#0a2342",
+                        "inverse-primary": "#b2c7ef",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#d8e3fa",
+                        "surface": "#f9f9ff",
+                        "background": "#f9f9ff",
+                        "surface-container-highest": "#d8e3fa",
+                        "secondary-container": "#fed488",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#261900",
+                        "secondary-fixed-dim": "#e9c176",
+                        "on-primary-fixed-variant": "#324768",
+                        "on-tertiary-fixed": "#191c1d",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "secondary-fixed": "#ffdea5",
+                        "on-primary": "#ffffff",
+                        "on-primary-container": "#768baf",
+                        "tertiary-fixed-dim": "#c5c7c8",
+                        "on-primary-fixed": "#021c3a",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#d5e3ff",
+                        "tertiary": "#0a0d0e",
+                        "on-secondary-container": "#785a1a",
+                        "inverse-surface": "#263142",
+                        "on-surface-variant": "#44474e",
+                        "surface-bright": "#f9f9ff",
+                        "surface-container-low": "#f0f3ff",
+                        "surface-tint": "#4a5f81",
+                        "outline": "#74777e",
+                        "inverse-on-surface": "#ebf1ff",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#cfdaf1",
+                        "tertiary-fixed": "#e1e3e4",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#111c2c",
+                        "primary": "#000d22",
+                        "secondary": "#775a19",
+                        "surface-container-high": "#dee8ff",
+                        "on-tertiary-fixed-variant": "#454748",
+                        "surface-container": "#e7eeff",
+                        "tertiary-container": "#202324",
+                        "on-tertiary-container": "#888a8b",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#b2c7ef",
+                        "outline-variant": "#c4c6cf",
+                        "on-surface": "#111c2c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-xl": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+        .faq-item.active .faq-content { max-height: 500px; }
+        .faq-item.active .faq-icon { transform: rotate(180deg); }
+        .faq-icon { transition: transform 0.3s ease; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md antialiased min-h-screen">
+<aside class="bg-surface dark:bg-surface h-screen w-72 flex flex-col fixed left-0 top-0 border-r border-outline-variant dark:border-outline">
+<div class="flex flex-col h-full py-8">
+<div class="px-6 mb-10 flex flex-col items-center text-center">
+<div class="w-20 h-20 rounded-full bg-surface-container-high flex items-center justify-center mb-4 overflow-hidden border border-outline-variant">
+<span class="material-symbols-outlined text-4xl text-on-surface-variant">person</span>
+</div>
+<h2 class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary">Azevedo Martiniano</h2>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1">Área de Membros</p>
+<button class="mt-4 w-full bg-transparent border border-secondary text-secondary font-label-md text-label-md py-2 rounded hover:bg-secondary/5 transition-colors">Ver Certificado</button>
+</div>
+<nav class="flex-1 flex flex-col gap-1 px-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:border-secondary transition-all duration-200 hover:text-secondary rounded" href="#">
+<span class="material-symbols-outlined">home</span>
+<span>Home</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:border-secondary transition-all duration-200 hover:text-secondary rounded" href="#">
+<span class="material-symbols-outlined">school</span>
+<span>Tutoriais</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:border-secondary transition-all duration-200 hover:text-secondary rounded" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+<span>Materiais de Apoio</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-secondary dark:text-secondary-fixed border-l-4 border-secondary font-label-md text-label-md bg-surface-container-low scale-[0.98] transition-transform rounded-r" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">help_center</span>
+<span>Suporte</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:border-secondary transition-all duration-200 hover:text-secondary rounded mt-auto" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span>Sair</span>
+</a>
+</nav>
+</div>
+</aside>
+<header class="bg-surface dark:bg-surface docked full-width top-0 sticky z-40 border-b border-outline-variant dark:border-outline flex justify-between items-center w-full px-10 h-20 ml-72 max-w-[calc(100%-18rem)]">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-inverse-primary">Cartório Azevedo Martiniano</span>
+<nav class="hidden lg:flex gap-6">
+<a class="text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:text-secondary transition-colors duration-200" href="#">Meus Cursos</a>
+<a class="text-on-surface-variant dark:text-surface-variant font-label-md text-label-md hover:text-secondary transition-colors duration-200" href="#">Progresso</a>
+</nav>
+</div>
+<div class="flex items-center gap-6">
+<div class="relative hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded text-body-md font-body-md focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none w-64 transition-all" placeholder="Buscar..." type="text"/>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<main class="ml-72 p-margin-desktop min-h-[calc(100vh-5rem)] flex flex-col">
+<div class="max-w-container-max w-full mx-auto flex-1">
+<div class="mb-12">
+<h1 class="font-headline-xl text-headline-xl text-primary mb-3">Central de Suporte</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Encontre respostas rápidas para as dúvidas mais comuns ou entre em contato diretamente com nossa equipe especializada e plataforma de IA.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter items-start">
+<div class="lg:col-span-7 space-y-6">
+<h2 class="font-headline-md text-headline-md text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">forum</span>
+                        Perguntas Frequentes
+                    </h2>
+<div class="space-y-4">
+<div class="faq-item bg-surface-container-lowest border border-outline-variant rounded transition-colors hover:border-secondary cursor-pointer">
+<div class="px-6 py-4 flex justify-between items-center" onclick="toggleFaq(this)">
+<h3 class="font-label-md text-label-md text-primary">Como posso interagir com a Plataforma IA em um curso específico?</h3>
+<span class="material-symbols-outlined faq-icon text-on-surface-variant">expand_more</span>
+</div>
+<div class="faq-content bg-surface-container-low/50">
+<div class="px-6 pb-5 pt-2 font-body-md text-body-md text-on-surface-variant border-t border-outline-variant/30">
+                                    Dentro de qualquer módulo do curso, você encontrará um ícone de 'Assistente IA' flutuante no canto inferior direito. Clique nele para abrir o painel de chat e faça perguntas sobre o material atual, jurisprudência relacionada ou conceitos complexos. A IA é treinada especificamente com o acervo do Cartório.
+                                </div>
+</div>
+</div>
+<div class="faq-item bg-surface-container-lowest border border-outline-variant rounded transition-colors hover:border-secondary cursor-pointer">
+<div class="px-6 py-4 flex justify-between items-center" onclick="toggleFaq(this)">
+<h3 class="font-label-md text-label-md text-primary">Onde encontro meus certificados de conclusão?</h3>
+<span class="material-symbols-outlined faq-icon text-on-surface-variant">expand_more</span>
+</div>
+<div class="faq-content bg-surface-container-low/50">
+<div class="px-6 pb-5 pt-2 font-body-md text-body-md text-on-surface-variant border-t border-outline-variant/30">
+                                    Seus certificados ficam disponíveis na seção "Progresso", localizada no menu superior. Assim que um curso atinge 100% de conclusão e as avaliações são aprovadas, o botão de download do certificado com validação digital é liberado automaticamente.
+                                </div>
+</div>
+</div>
+<div class="faq-item bg-surface-container-lowest border border-outline-variant rounded transition-colors hover:border-secondary cursor-pointer">
+<div class="px-6 py-4 flex justify-between items-center" onclick="toggleFaq(this)">
+<h3 class="font-label-md text-label-md text-primary">Qual o tempo de resposta do suporte técnico humano?</h3>
+<span class="material-symbols-outlined faq-icon text-on-surface-variant">expand_more</span>
+</div>
+<div class="faq-content bg-surface-container-low/50">
+<div class="px-6 pb-5 pt-2 font-body-md text-body-md text-on-surface-variant border-t border-outline-variant/30">
+                                    Nossa equipe técnica atende de segunda a sexta, das 09h às 18h. O prazo de primeira resposta para tickets abertos via formulário é de até 4 horas úteis. Para questões críticas de acesso, o atendimento é priorizado.
+                                </div>
+</div>
+</div>
+<div class="faq-item bg-surface-container-lowest border border-outline-variant rounded transition-colors hover:border-secondary cursor-pointer">
+<div class="px-6 py-4 flex justify-between items-center" onclick="toggleFaq(this)">
+<h3 class="font-label-md text-label-md text-primary">A plataforma de IA tem limite de consultas diárias?</h3>
+<span class="material-symbols-outlined faq-icon text-on-surface-variant">expand_more</span>
+</div>
+<div class="faq-content bg-surface-container-low/50">
+<div class="px-6 pb-5 pt-2 font-body-md text-body-md text-on-surface-variant border-t border-outline-variant/30">
+                                    Para garantir a estabilidade e qualidade das respostas para todos os alunos, implementamos um limite flexível de 50 interações complexas por dia por usuário. Consultas simples ou navegação guiada não contabilizam neste limite.
+                                </div>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="bg-surface-container-lowest border border-outline-variant rounded p-8 sticky top-28">
+<div class="mb-6">
+<h2 class="font-headline-md text-headline-md text-primary mb-2">Fale Conosco</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Não encontrou o que precisava? Envie uma mensagem direta para nossa equipe ou para o time de curadoria da IA.</p>
+</div>
+<form class="space-y-5">
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Assunto</label>
+<select class="w-full bg-surface border border-outline-variant rounded px-4 py-3 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none appearance-none transition-all">
+<option>Dúvida sobre a Plataforma IA</option>
+<option>Suporte Técnico / Acesso</option>
+<option>Dúvida sobre Conteúdo/Curso</option>
+<option>Certificados e Documentação</option>
+<option>Outros</option>
+</select>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Nome</label>
+<input class="w-full bg-surface-container-low border border-outline-variant/50 rounded px-4 py-3 font-body-md text-body-md text-on-surface-variant outline-none" readonly="" type="text" value="Azevedo Martiniano"/>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Matrícula</label>
+<input class="w-full bg-surface-container-low border border-outline-variant/50 rounded px-4 py-3 font-body-md text-body-md text-on-surface-variant outline-none" readonly="" type="text" value="CAM-2023-891"/>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Sua Mensagem</label>
+<textarea class="w-full bg-surface border border-outline-variant rounded px-4 py-3 font-body-md text-body-md text-on-surface focus:border-primary focus:ring-2 focus:ring-primary/10 outline-none transition-all resize-y" placeholder="Descreva sua dúvida com o máximo de detalhes..." rows="4"></textarea>
+</div>
+<button class="w-full bg-primary text-on-primary hover:bg-inverse-surface transition-colors rounded font-label-md text-label-md px-6 py-3 mt-2 flex justify-center items-center gap-2" type="button">
+                                Enviar Mensagem
+                                <span class="material-symbols-outlined text-sm">send</span>
+</button>
+</form>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        function toggleFaq(element) {
+            const item = element.parentElement;
+            const wasActive = item.classList.contains('active');
+            
+            document.querySelectorAll('.faq-item').forEach(el => {
+                el.classList.remove('active');
+                el.querySelector('.faq-icon').textContent = 'expand_more';
+            });
+
+            if (!wasActive) {
+                item.classList.add('active');
+                item.querySelector('.faq-icon').textContent = 'expand_less';
+            }
+        }
+    </script>
+</body></html>

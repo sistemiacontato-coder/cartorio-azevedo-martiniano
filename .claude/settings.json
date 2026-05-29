@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:azevedo-martiniano--sample-app-v1oas5p2.web.app)",
+      "Bash(gh auth *)"
+    ]
+  }
+}

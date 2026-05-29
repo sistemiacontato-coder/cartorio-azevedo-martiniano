@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tutoriais - Cartório Azevedo Martiniano</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-container": "#0a2342",
+                        "inverse-primary": "#b2c7ef",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#d8e3fa",
+                        "surface": "#f9f9ff",
+                        "background": "#f9f9ff",
+                        "surface-container-highest": "#d8e3fa",
+                        "secondary-container": "#fed488",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed": "#261900",
+                        "secondary-fixed-dim": "#e9c176",
+                        "on-primary-fixed-variant": "#324768",
+                        "on-tertiary-fixed": "#191c1d",
+                        "on-secondary-fixed-variant": "#5d4201",
+                        "secondary-fixed": "#ffdea5",
+                        "on-primary": "#ffffff",
+                        "on-primary-container": "#768baf",
+                        "tertiary-fixed-dim": "#c5c7c8",
+                        "on-primary-fixed": "#021c3a",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#d5e3ff",
+                        "tertiary": "#0a0d0e",
+                        "on-secondary-container": "#785a1a",
+                        "inverse-surface": "#263142",
+                        "on-surface-variant": "#44474e",
+                        "surface-bright": "#f9f9ff",
+                        "surface-container-low": "#f0f3ff",
+                        "surface-tint": "#4a5f81",
+                        "outline": "#74777e",
+                        "inverse-on-surface": "#ebf1ff",
+                        "on-tertiary": "#ffffff",
+                        "surface-dim": "#cfdaf1",
+                        "tertiary-fixed": "#e1e3e4",
+                        "surface-container-lowest": "#ffffff",
+                        "on-background": "#111c2c",
+                        "primary": "#000d22",
+                        "secondary": "#775a19",
+                        "surface-container-high": "#dee8ff",
+                        "on-tertiary-fixed-variant": "#454748",
+                        "surface-container": "#e7eeff",
+                        "tertiary-container": "#202324",
+                        "on-tertiary-container": "#888a8b",
+                        "on-error": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#b2c7ef",
+                        "outline-variant": "#c4c6cf",
+                        "on-surface": "#111c2c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "unit": "8px",
+                        "container-max": "1280px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "40px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "headline-lg": ["Manrope"],
+                        "headline-md": ["Manrope"],
+                        "body-lg": ["Inter"],
+                        "headline-lg-mobile": ["Manrope"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-xl": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-xl": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="bg-background font-body-md text-body-md text-on-surface antialiased flex min-h-screen">
+<!-- SideNavBar (Shared Component) -->
+<nav class="bg-surface h-screen w-72 flex flex-col fixed left-0 top-0 border-r border-outline-variant py-8 z-50 flex flex-col h-full">
+<!-- Header Profile Area -->
+<div class="px-6 mb-10 flex flex-col items-center text-center">
+<div class="w-20 h-20 rounded-full overflow-hidden mb-4 border-2 border-surface-container-high">
+<img alt="Foto de perfil do usuário" class="w-full h-full object-cover" data-alt="A professional corporate headshot of a person looking confident and approachable. The background is a soft, completely out-of-focus light gray. The lighting is studio-quality, soft and flattering. The color palette aligns with a modern, premium brand, focusing on neutral tones with a hint of warmth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0DQsFt5HAf6rldbahMZ9asdU4AMjUbBV9LjsBX7Ry4e1Jit-EWKAO6AK3QVnNs_pxTcTskIwOBno-cILEA-mAihicWrbqv9pK7ZYloIEm1XI9PkNGIfLWIylaNPSYZuFJYhd8aA7rltpHON5h7w7UWKQ7SfvUhWc-jTddlX4N531H59B6bDWzC5AeJLOcWvvzSVB-vfMCYpx-bvXMHelm7GpAx7YFp2Ghy-UH0Pv9M_shA2x2gfpZCPI2_mFL8-lRnY1nT7OVyrQZ"/>
+</div>
+<h2 class="font-headline-md text-headline-md font-bold text-primary">Azevedo Martiniano</h2>
+<p class="font-label-md text-label-md text-on-surface-variant mt-1">Área de Membros</p>
+</div>
+<!-- Navigation Tabs -->
+<div class="flex-1 flex flex-col gap-2 w-full">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-label-md text-label-md hover:text-secondary transition-all duration-200" href="#">
+<span class="material-symbols-outlined">home</span>
+                Home
+            </a>
+<!-- Active Tab: Tutoriais -->
+<a class="flex items-center gap-3 px-4 py-3 text-secondary border-l-4 border-secondary font-label-md text-label-md bg-surface-container-low transition-transform scale-[0.98]" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">school</span>
+                Tutoriais
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-label-md text-label-md hover:text-secondary transition-all duration-200" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+                Materiais de Apoio
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-label-md text-label-md hover:text-secondary transition-all duration-200" href="#">
+<span class="material-symbols-outlined">help_center</span>
+                Suporte
+            </a>
+</div>
+<!-- Footer / Logout / CTA -->
+<div class="px-6 mt-auto flex flex-col gap-4 w-full">
+<button class="w-full py-2 px-4 rounded border border-secondary text-secondary font-label-md text-label-md hover:bg-surface-container-low transition-colors flex justify-center items-center">
+                Ver Certificado
+            </button>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant font-label-md text-label-md hover:text-error transition-all duration-200" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Sair
+            </a>
+</div>
+</nav>
+<!-- Main Content Wrapper -->
+<div class="flex-1 ml-72 flex flex-col min-h-screen">
+<!-- TopNavBar (Shared Component) -->
+<header class="bg-surface docked full-width top-0 sticky z-40 border-b border-outline-variant flex justify-between items-center w-full px-10 h-20">
+<!-- Brand -->
+<div class="font-headline-md text-headline-md font-bold text-primary tracking-tight">
+                Cartório Azevedo Martiniano
+            </div>
+<!-- Search (on_right logic implied by JSON order) -->
+<div class="flex items-center gap-8 ml-auto">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-64 pl-10 pr-4 py-2 bg-surface-container-lowest border border-outline-variant rounded focus:border-primary focus:ring-2 focus:ring-primary/10 transition-all font-body-md text-body-md text-on-surface outline-none" placeholder="Buscar..." type="text"/>
+</div>
+<!-- Navigation Links -->
+<div class="flex items-center gap-6">
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-secondary transition-colors duration-200" href="#">Meus Cursos</a>
+<a class="text-on-surface-variant font-label-md text-label-md hover:text-secondary transition-colors duration-200" href="#">Progresso</a>
+</div>
+<!-- Trailing Icon Actions -->
+<div class="flex items-center gap-4 border-l border-outline-variant pl-6">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-outline-variant ml-2 cursor-pointer">
+<img alt="Avatar do Aluno" class="w-full h-full object-cover" data-alt="A professional corporate headshot of a person looking confident and approachable. The background is a soft, completely out-of-focus light gray. The lighting is studio-quality, soft and flattering. The color palette aligns with a modern, premium brand, focusing on neutral tones with a hint of warmth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCOTE-BO39cCD3dL4cp-cHphgXSD9_QeeLDD6NS6YKpmQi42sXsznBaXohzxlxYwJW0AnDo-2Q2mJv-7gRZK12-TeWj7lpXjq7WU0ZXJljYS_evaOXq_5EzmfAa_Ta-21LCPAPkiZ793UkPD0cI5utvfYBMkM7UP8kF1grKlwXBaT8EEiGbbN_SInA8kegBrBqF0_GIyO37PufDELda128tlrJX6X2IVGYJGedOR6ttDPazsuKoDwd5O3dl7lW0FWyGxi4ncQEwYL2y"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Canvas -->
+<main class="flex-1 w-full max-w-container-max mx-auto p-margin-desktop">
+<!-- Page Header -->
+<div class="mb-10">
+<h1 class="font-headline-xl text-headline-xl text-primary mb-2">Trilhas de Aprendizagem</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Continue seu desenvolvimento profissional com nossos módulos especializados. Cada etapa concluída fortalece a excelência do nosso atendimento.</p>
+</div>
+<!-- Bento Grid / Cards Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Module 1: Completed -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden group hover:border-secondary transition-all duration-300 flex flex-col cursor-pointer relative">
+<!-- Thumbnail -->
+<div class="h-48 w-full bg-surface-container overflow-hidden relative">
+<img alt="Introdução à IA" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A polished, minimalist digital illustration representing Artificial Intelligence in a corporate legal context. The scene features glowing neural network nodes subtly overlaid on a pristine, structured document layout. The lighting is bright and clean, emphasizing a modern, light-mode aesthetic with a color palette of deep midnight blue, noble gold, and crisp white. The mood is highly professional, trustworthy, and technologically advanced." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJF7w0b9JaWcVYCK3CM8yrer4WJYEDZ9xijiAlumCj312gtNwYMsrBbV9no2lh5J0sxIE7JV6eDfoi3Fj1d4RhZxqA6ragUDekBBp0K0ST-vzpWW5it5So5IHTHoSGtcbzDhzrp3LYLYmtTyoxhgzrbT8WKvX8vWzI9uS1cmAg3iHsiI96ZGQxE1eCwgRIUEO1L2i6pIIMwxQWOqpA8McnRxrMLfdBxp7tSvyO9AzJm4gkW4a7BQBdryi2iM3_wPeq3vrkBQW0akcA"/>
+<div class="absolute inset-0 bg-primary/10 group-hover:bg-transparent transition-colors duration-300"></div>
+<div class="absolute top-4 right-4 bg-surface-container-lowest/90 backdrop-blur px-3 py-1 rounded font-label-sm text-label-sm text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">check_circle</span>
+                            Concluído
+                        </div>
+</div>
+<!-- Content -->
+<div class="p-6 flex flex-col flex-1">
+<h3 class="font-headline-md text-headline-md text-primary mb-3 group-hover:text-secondary transition-colors">Introdução à IA</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-1 mb-6">Compreenda os fundamentos da Inteligência Artificial e como ela está transformando as rotinas notariais modernas.</p>
+<!-- Progress Area -->
+<div class="mt-auto">
+<div class="flex justify-between items-center mb-2 font-label-sm text-label-sm text-on-surface-variant">
+<span>Progresso</span>
+<span>100%</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full h-1 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Module 2: In Progress (Featured with Gold Border) -->
+<div class="bg-surface-container-lowest border border-outline-variant border-t-4 border-t-secondary rounded-lg overflow-hidden group hover:shadow-[0_10px_25px_-5px_rgba(10,35,66,0.05)] transition-all duration-300 flex flex-col cursor-pointer relative translate-y-[-4px]">
+<!-- Thumbnail -->
+<div class="h-48 w-full bg-surface-container overflow-hidden relative">
+<img alt="Comandos Básicos" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A clean, modern graphical representation of a command line interface seamlessly integrated into a sleek, minimalist workspace. The focus is on precision and efficiency, with sharp geometric lines and a structured layout. The environment is illuminated by high-key, soft white light, utilizing a sophisticated palette of soft gray, midnight blue, and subtle gold accents. The overall atmosphere conveys legal authority combined with digital mastery." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6LFvpiK8TvwLz5NuQxHQp0G5JyQAmai3Pi_NQLjrrcYqhagGV1kr0wu7JtOgvrkOCEtd7RZ7LX_ddol2qGYBFvGsd6GU3sfloMtaebQ9Wg50qIIVCr-4kyxeCvbPpUxInx9TDeMJf2sUNdaA5qfnMjwa0jfuzQkOfz7sIISe-xgMtwly8k5w1nCp-4s8j_zCHdgARQmu52QvBp8aFglX_MWYwfXodhJ6smWymsMJjF7xhcePuI33MtgIcplM4Fncgo52fxMcQiFw5"/>
+<div class="absolute inset-0 bg-primary/5 group-hover:bg-transparent transition-colors duration-300"></div>
+<div class="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-primary/40 to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<span class="bg-secondary text-on-secondary font-label-sm text-label-sm px-2 py-1 rounded tracking-wider uppercase">Em Andamento</span>
+</div>
+<!-- Play Button Overlay -->
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<div class="w-12 h-12 rounded-full bg-surface/90 backdrop-blur flex items-center justify-center text-primary shadow-lg">
+<span class="material-symbols-outlined ml-1" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+</div>
+</div>
+<!-- Content -->
+<div class="p-6 flex flex-col flex-1 bg-surface-bright">
+<h3 class="font-headline-md text-headline-md text-primary mb-3">Comandos Básicos</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-1 mb-6">Aprenda os prompts estruturados e comandos essenciais para extrair o máximo das ferramentas de IA disponíveis no cartório.</p>
+<!-- Progress Area -->
+<div class="mt-auto">
+<div class="flex justify-between items-center mb-2 font-label-sm text-label-sm text-on-surface-variant">
+<span>Aulas 2 de 5 concluídas</span>
+<span class="text-secondary font-semibold">40%</span>
+</div>
+<!-- Progress Bar -->
+<div class="w-full h-1 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[40%] transition-all duration-1000 ease-out"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Module 3: Not Started -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg overflow-hidden group hover:border-secondary transition-all duration-300 flex flex-col cursor-pointer opacity-90 hover:opacity-100">
+<!-- Thumbnail -->
+<div class="h-48 w-full bg-surface-container overflow-hidden relative">
+<img alt="Integração com Processos do Cartório" class="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-105 transition-all duration-500" data-alt="An abstract, high-end visualization of data flow and process integration within a modern notary office. Polished geometric blocks interlock perfectly, symbolizing seamless integration between traditional legal structures and new digital systems. The scene is bright and airy, flooded with soft, natural-looking light. The color scheme is strictly professional, relying on midnight blue, stark white, and touches of premium gold to signify quality and trust." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDg7UakTdMZNUxE10RbX7KkVXuTqoK2thjGz63eBK4MrwOE5fXZFTDKHnV2K4B1-0kPzMVTiQSS7nzYUSkPDMf4Dhap9JY77nDKmQFVFMfJrHZmuW0M4ySmcly-oksfdkl1DAVq-2bRrOcPa8thE8Laja6t8qV9DQlDZC5_TWTGP-y-2DbZ32-fPo_12dk7eJDLMhE8IpZltFvybcuoUbDr4SM_mS3_aCKED7_W_wtZEVSUSY3tTeXwhwM636Ugz7Hbl-8Q0Pg7W2xA"/>
+</div>
+<!-- Content -->
+<div class="p-6 flex flex-col flex-1">
+<h3 class="font-headline-md text-headline-md text-primary mb-3 group-hover:text-secondary transition-colors">Integração com Processos do Cartório</h3>
+<p class="font-body-md text-body-md text-on-surface-variant flex-1 mb-6">Aplicação prática da IA nos procedimentos internos, redação de documentos e análise de conformidade legal.</p>
+<!-- Action Area -->
+<div class="mt-auto pt-4 border-t border-outline-variant/50">
+<div class="flex items-center text-primary font-label-md text-label-md group-hover:text-secondary transition-colors">
+<span class="material-symbols-outlined mr-2">lock_open</span>
+                                Iniciar Módulo
+                                <span class="material-symbols-outlined ml-auto opacity-0 group-hover:opacity-100 transition-opacity translate-x-[-10px] group-hover:translate-x-0 duration-300">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>
