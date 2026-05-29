@@ -503,7 +503,11 @@ async function atualizarRelatorio() {
     return;
   }
 
-  if (relatorio.length === 0) {
+  // Oculta visualizações do master para administradores
+  const masterEmails = new Set(getUsuarios().filter(u => u.role === 'master').map(u => u.email));
+  const relatorioFiltrado = isMaster() ? relatorio : relatorio.filter(u => !masterEmails.has(u.email));
+
+  if (relatorioFiltrado.length === 0) {
     container.innerHTML = `
       <div class="text-center py-10">
         <span class="material-symbols-outlined text-4xl text-outline block mb-3">person_off</span>
@@ -513,7 +517,7 @@ async function atualizarRelatorio() {
     return;
   }
 
-  const cards = relatorio.map((u, idx) => {
+  const cards = relatorioFiltrado.map((u, idx) => {
     const assistidos = videos.filter(v => {
       const d = u.videos[String(v.id)];
       return d && d.count > 0;
