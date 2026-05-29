@@ -30,7 +30,7 @@ const DADOS_PADRAO = {
 // Monta URL de embed do Vimeo sem duplicar o "?"
 function vimeoSrc(url, autoplay) {
   const sep = url.includes('?') ? '&' : '?';
-  return url + sep + 'title=0&byline=0&portrait=0' + (autoplay ? '&autoplay=1' : '');
+  return url + sep + 'title=0&byline=0&portrait=0&api=1' + (autoplay ? '&autoplay=1' : '');
 }
 
 // --- STORAGE ---
@@ -51,9 +51,8 @@ function isMaster() { return localStorage.getItem('userRole') === 'master'; }
 
 let _aulaAtivaId = null;
 
-// --- TRACKING DE VÍDEO (Vimeo SDK) ---
+// --- TRACKING DE VÍDEO (postMessage direto — sem SDK) ---
 const MIN_WATCH_SECONDS = 30;
-let _vPlayer = null;
 let _watchStart = null;
 let _totalWatched = 0;
 let _viewRegistered = false;
@@ -66,24 +65,6 @@ function setupVimeoTracking(lessonId, titulo) {
   _watchStart = null;
   _totalWatched = 0;
   _viewRegistered = false;
-
-  if (typeof Vimeo === 'undefined') return;
-  if (_vPlayer) { try { _vPlayer.destroy(); } catch(e) {} _vPlayer = null; }
-
-  const iframe = document.getElementById('vimeo-player');
-  if (!iframe) return;
-
-  const onLoad = () => {
-    iframe.removeEventListener('load', onLoad);
-    try {
-      _vPlayer = new Vimeo.Player(iframe);
-      _vPlayer.on('play',  () => { _watchStart = Date.now(); });
-      _vPlayer.on('pause', () => { _acumularTempo(); _checarView(); });
-      _vPlayer.on('ended', () => { _acumularTempo(); _checarView(); });
-      _vPlayer.on('timeupdate', () => { if (!_viewRegistered) _checarView(); });
-    } catch(e) { console.warn('[Vimeo SDK]', e.message); }
-  };
-  iframe.addEventListener('load', onLoad);
 }
 
 function _acumularTempo() {
@@ -91,7 +72,7 @@ function _acumularTempo() {
 }
 
 function _checarView() {
-  if (_viewRegistered) return;
+  if (_viewRegistered || !_trackingId) return;
   const total = _watchStart ? _totalWatched + (Date.now() - _watchStart) / 1000 : _totalWatched;
   if (total >= MIN_WATCH_SECONDS) {
     _viewRegistered = true;
@@ -99,6 +80,28 @@ function _checarView() {
     if (email) registrarVisualizacao(email, _trackingId, _trackingTitulo);
   }
 }
+
+// Escuta eventos reais do player Vimeo via postMessage
+window.addEventListener('message', function(e) {
+  if (!e.data || typeof e.data !== 'string') return;
+  try {
+    const msg = JSON.parse(e.data);
+    if (msg.event === 'ready') {
+      // Registra listeners de play/pause/finish no player
+      const iframe = document.getElementById('vimeo-player');
+      if (iframe && iframe.contentWindow) {
+        ['play','pause','finish'].forEach(ev => {
+          iframe.contentWindow.postMessage(JSON.stringify({method:'addEventListener', value:ev}), '*');
+        });
+      }
+    } else if (msg.event === 'play') {
+      _watchStart = Date.now();
+    } else if (msg.event === 'pause' || msg.event === 'finish') {
+      _acumularTempo();
+      _checarView();
+    }
+  } catch(_) {}
+});
 function isAdministrador() { return localStorage.getItem('userRole') === 'administrador'; }
 function isAdminOrMaster() { const r = localStorage.getItem('userRole'); return r === 'master' || r === 'administrador'; }
 
