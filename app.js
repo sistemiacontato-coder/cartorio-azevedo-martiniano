@@ -50,6 +50,55 @@ function getConfig() { return getData().config; }
 function isMaster() { return localStorage.getItem('userRole') === 'master'; }
 
 let _aulaAtivaId = null;
+
+// --- TRACKING DE VÍDEO (Vimeo SDK) ---
+const MIN_WATCH_SECONDS = 30;
+let _vPlayer = null;
+let _watchStart = null;
+let _totalWatched = 0;
+let _viewRegistered = false;
+let _trackingId = null;
+let _trackingTitulo = null;
+
+function setupVimeoTracking(lessonId, titulo) {
+  _trackingId = lessonId;
+  _trackingTitulo = titulo;
+  _watchStart = null;
+  _totalWatched = 0;
+  _viewRegistered = false;
+
+  if (typeof Vimeo === 'undefined') return;
+  if (_vPlayer) { try { _vPlayer.destroy(); } catch(e) {} _vPlayer = null; }
+
+  const iframe = document.getElementById('vimeo-player');
+  if (!iframe) return;
+
+  const onLoad = () => {
+    iframe.removeEventListener('load', onLoad);
+    try {
+      _vPlayer = new Vimeo.Player(iframe);
+      _vPlayer.on('play',  () => { _watchStart = Date.now(); });
+      _vPlayer.on('pause', () => { _acumularTempo(); _checarView(); });
+      _vPlayer.on('ended', () => { _acumularTempo(); _checarView(); });
+      _vPlayer.on('timeupdate', () => { if (!_viewRegistered) _checarView(); });
+    } catch(e) { console.warn('[Vimeo SDK]', e.message); }
+  };
+  iframe.addEventListener('load', onLoad);
+}
+
+function _acumularTempo() {
+  if (_watchStart) { _totalWatched += (Date.now() - _watchStart) / 1000; _watchStart = null; }
+}
+
+function _checarView() {
+  if (_viewRegistered) return;
+  const total = _watchStart ? _totalWatched + (Date.now() - _watchStart) / 1000 : _totalWatched;
+  if (total >= MIN_WATCH_SECONDS) {
+    _viewRegistered = true;
+    const email = localStorage.getItem('userEmail');
+    if (email) registrarVisualizacao(email, _trackingId, _trackingTitulo);
+  }
+}
 function isAdministrador() { return localStorage.getItem('userRole') === 'administrador'; }
 function isAdminOrMaster() { const r = localStorage.getItem('userRole'); return r === 'master' || r === 'administrador'; }
 
@@ -255,8 +304,8 @@ function selectLesson(id) {
   const ul = document.querySelector('#view-tutoriais ul');
   if (ul) ul.innerHTML = renderLessonItems(data.tutoriais, id);
 
-  const email = localStorage.getItem('userEmail');
-  if (email) registrarVisualizacao(email, aula.id, aula.titulo);
+  // Inicia tracking: só registra após 30s de reprodução real
+  setupVimeoTracking(aula.id, aula.titulo);
 }
 
 function renderLessonItems(aulas, ativaId) {
