@@ -261,11 +261,11 @@ function selectLesson(id) {
 
 function renderLessonItems(aulas, ativaId) {
   return aulas.map(a => `
-    <li onclick="selectLesson(${a.id})" class="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-surface-container-low transition-colors ${a.id===ativaId ? 'bg-surface-container-low border-l-[3px] border-l-secondary' : ''}">
+    <li onclick="selectLesson(${a.id})" class="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-surface-container-low transition-colors ${a.id===ativaId ? 'aula-ativa' : ''}">
       <div class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${a.concluida?'bg-secondary/10 text-secondary':'bg-surface-container text-on-surface-variant'}">
         <span class="material-symbols-outlined text-sm" ${a.concluida?'style="font-variation-settings:\'FILL\' 1"':''}>${a.concluida?'check_circle':'play_circle'}</span>
       </div>
-      <div class="flex-1 min-w-0"><p class="font-label-md text-label-md ${a.id===ativaId ? 'text-primary font-bold' : 'text-on-surface'} truncate">${a.titulo}</p></div>
+      <div class="flex-1 min-w-0"><p class="aula-titulo font-label-md text-label-md text-on-surface truncate">${a.titulo}</p></div>
       ${a.concluida?'<span class="font-label-sm text-label-sm text-secondary">✓</span>':''}
     </li>`).join('');
 }

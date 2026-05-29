@@ -66,6 +66,16 @@
 }
 .admin-item:hover { border-color: #775a19; background: #f0f3ff; }
 
+/* Aula ativa na lista de tutoriais */
+.aula-ativa {
+  background: #f0f3ff;
+  border-left: 3px solid #775a19 !important;
+}
+.aula-ativa .aula-titulo {
+  color: #000d22;
+  font-weight: 700;
+}
+
 /* Spinner relatório */
 @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
 
