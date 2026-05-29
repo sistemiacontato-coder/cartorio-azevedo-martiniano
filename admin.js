@@ -112,7 +112,7 @@ function videoAdminRow(t) {
     <div class="flex items-center gap-3 flex-1 min-w-0">
       <span class="material-symbols-outlined text-primary shrink-0 ${t.concluida?'text-secondary':''}" ${t.concluida?'style="font-variation-settings:\'FILL\' 1"':''}>${t.concluida?'check_circle':'play_circle'}</span>
       <div class="min-w-0"><p class="font-label-md text-label-md text-primary truncate">${t.titulo}</p>
-      <p class="font-label-sm text-label-sm text-on-surface-variant truncate">${t.duracao} • ${t.url.substring(0,40)}...</p></div>
+      <p class="font-label-sm text-label-sm text-on-surface-variant truncate">${t.url.substring(0,50)}...</p></div>
     </div>
     <div class="flex items-center gap-2 shrink-0">
       <button onclick="abrirModalVideo(${t.id})" class="p-1.5 text-on-surface-variant hover:text-primary transition-colors" title="Editar"><span class="material-symbols-outlined text-sm">edit</span></button>
@@ -229,14 +229,10 @@ function abrirModalVideo(id) {
       <input id="v_titulo" value="${v?v.titulo:''}" class="w-full border border-outline-variant rounded px-4 py-3 font-body-md text-body-md focus:border-primary outline-none" required></div>
       <div><label class="block font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">URL do Vimeo (embed)</label>
       <input id="v_url" value="${v?v.url:''}" placeholder="https://player.vimeo.com/video/XXXXXX" class="w-full border border-outline-variant rounded px-4 py-3 font-body-md text-body-md focus:border-primary outline-none" required></div>
-      <div class="grid grid-cols-2 gap-4">
-        <div><label class="block font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Duração</label>
-        <input id="v_duracao" value="${v?v.duracao:''}" placeholder="10:30" class="w-full border border-outline-variant rounded px-4 py-3 font-body-md text-body-md focus:border-primary outline-none" required></div>
-        <div><label class="block font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Concluído?</label>
-        <select id="v_concluida" class="w-full border border-outline-variant rounded px-4 py-3 font-body-md text-body-md focus:border-primary outline-none">
-          <option value="false" ${v&&!v.concluida?'selected':''}>Não</option><option value="true" ${v&&v.concluida?'selected':''}>Sim</option>
-        </select></div>
-      </div>
+      <div><label class="block font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Concluído?</label>
+      <select id="v_concluida" class="w-full border border-outline-variant rounded px-4 py-3 font-body-md text-body-md focus:border-primary outline-none">
+        <option value="false" ${v&&!v.concluida?'selected':''}>Não</option><option value="true" ${v&&v.concluida?'selected':''}>Sim</option>
+      </select></div>
       <div class="flex gap-3 pt-2">
         <button type="submit" class="flex-1 py-2.5 bg-primary text-on-primary font-label-md text-label-md rounded hover:bg-inverse-surface transition-colors">Salvar</button>
         <button type="button" onclick="fecharModal()" class="flex-1 py-2.5 border border-outline-variant text-on-surface-variant font-label-md text-label-md rounded hover:bg-surface-container-low transition-colors">Cancelar</button>
@@ -249,7 +245,6 @@ function salvarVideo(id) {
   const obj = {
     titulo: document.getElementById('v_titulo').value,
     url: document.getElementById('v_url').value,
-    duracao: document.getElementById('v_duracao').value,
     concluida: document.getElementById('v_concluida').value === 'true',
     material: ''
   };

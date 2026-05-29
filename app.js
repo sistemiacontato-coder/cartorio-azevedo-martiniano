@@ -9,11 +9,13 @@ const DADOS_PADRAO = {
     certificado: true
   },
   tutoriais: [
-    { id:1, titulo:'Introdução ao Sistema', url:'https://player.vimeo.com/video/824804225', duracao:'08:32', concluida:true, material:'' },
-    { id:2, titulo:'Navegação e Interface', url:'https://player.vimeo.com/video/824804225', duracao:'12:15', concluida:true, material:'' },
-    { id:3, titulo:'Autenticação de Documentos', url:'https://player.vimeo.com/video/824804225', duracao:'15:40', concluida:false, material:'Manual de Autenticação' },
-    { id:4, titulo:'Reconhecimento de Firma', url:'https://player.vimeo.com/video/824804225', duracao:'11:20', concluida:false, material:'' },
-    { id:5, titulo:'Procurações e Atas Notariais', url:'https://player.vimeo.com/video/824804225', duracao:'18:05', concluida:false, material:'' }
+    { id:1, titulo:'Aula 1', url:'https://player.vimeo.com/video/1196631790?h=25c111001b', concluida:false, material:'' },
+    { id:2, titulo:'Aula 2', url:'https://player.vimeo.com/video/1196631862?h=091602f7e6', concluida:false, material:'' },
+    { id:3, titulo:'Aula 3', url:'https://player.vimeo.com/video/1196631868?h=73b15f14ee', concluida:false, material:'' },
+    { id:4, titulo:'Aula 4', url:'https://player.vimeo.com/video/1196631864?h=1fa86deec3', concluida:false, material:'' },
+    { id:5, titulo:'Aula 5', url:'https://player.vimeo.com/video/1196631789?h=80a48d31e6', concluida:false, material:'' },
+    { id:6, titulo:'Aula 6', url:'https://player.vimeo.com/video/1196631788?h=78f50c8827', concluida:false, material:'' },
+    { id:7, titulo:'Aula 7', url:'https://player.vimeo.com/video/1196631791?h=0a05f1df13', concluida:false, material:'' }
   ],
   materiais: [
     { id:1, icon:'picture_as_pdf', titulo:'Manual de Autenticação de Documentos', desc:'Diretrizes completas sobre conferência e selagem de cópias reprográficas.', tipo:'PDF', tamanho:'2.4 MB' },
@@ -26,9 +28,15 @@ const DADOS_PADRAO = {
 };
 
 // --- STORAGE ---
+const DATA_VERSION = 2; // incrementar quando os dados padrão mudarem
 function getData() {
   const raw = localStorage.getItem('cartorio_data');
-  if (!raw) { setData(DADOS_PADRAO); return DADOS_PADRAO; }
+  const version = parseInt(localStorage.getItem('cartorio_data_v') || '0');
+  if (!raw || version < DATA_VERSION) {
+    setData(DADOS_PADRAO);
+    localStorage.setItem('cartorio_data_v', DATA_VERSION);
+    return DADOS_PADRAO;
+  }
   return JSON.parse(raw);
 }
 function setData(d) { localStorage.setItem('cartorio_data', JSON.stringify(d)); }
@@ -222,8 +230,7 @@ function tutoriaisView() {
           <div class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${a.concluida?'bg-secondary/10 text-secondary':'bg-surface-container text-on-surface-variant'}">
             <span class="material-symbols-outlined text-sm" ${a.concluida?'style="font-variation-settings:\'FILL\' 1"':''}>${a.concluida?'check_circle':'play_circle'}</span>
           </div>
-          <div class="flex-1 min-w-0"><p class="font-label-md text-label-md ${a.id===ativa?.id?'text-primary font-bold':'text-on-surface'} truncate">${a.titulo}</p>
-          <p class="font-label-sm text-label-sm text-on-surface-variant">${a.duracao}</p></div>
+          <div class="flex-1 min-w-0"><p class="font-label-md text-label-md ${a.id===ativa?.id?'text-primary font-bold':'text-on-surface'} truncate">${a.titulo}</p></div>
           ${a.concluida?'<span class="font-label-sm text-label-sm text-secondary">✓</span>':''}
         </li>`).join('')}
       </ul>
