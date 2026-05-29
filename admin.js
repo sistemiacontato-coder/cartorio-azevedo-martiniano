@@ -524,60 +524,78 @@ async function atualizarRelatorio() {
     return;
   }
 
-  const thVideos = videos.map(v => {
-    const titulo = v.titulo.length > 18 ? v.titulo.substring(0, 18) + '…' : v.titulo;
-    return `<th class="text-center py-3 px-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider min-w-[110px]" title="${v.titulo}">${titulo}</th>`;
-  }).join('');
+  const cards = relatorio.map((u, idx) => {
+    const assistidos = videos.filter(v => {
+      const d = u.videos[String(v.id)];
+      return d && d.count > 0;
+    }).length;
+    const total = videos.length;
+    const loginStr = u.ultimoLogin ? formatarDataRelatorio(u.ultimoLogin) : 'Nunca acessou';
+    const iniciais = u.nome.split(' ').slice(0,2).map(p=>p[0].toUpperCase()).join('');
 
-  const rows = relatorio.map(u => {
-    let total = 0;
-    const cells = videos.map(v => {
+    const corProgresso = assistidos === 0 ? 'text-error' : assistidos === total ? 'text-secondary' : 'text-on-surface-variant';
+    const bgAvatar = assistidos === 0 ? 'bg-error-container text-on-error-container' : assistidos === total ? 'bg-secondary/10 text-secondary' : 'bg-surface-container text-on-surface';
+
+    const linhasVideos = videos.map((v, vi) => {
       const vData = u.videos[String(v.id)];
       const count = vData ? (vData.count || 0) : 0;
-      total += count;
-      if (count === 0) {
-        return `<td class="text-center py-3 px-3">
-          <span class="inline-flex items-center gap-1 text-error font-label-md text-label-md">
-            <span class="material-symbols-outlined text-sm">cancel</span>Não assistiu
+      const assistiu = count > 0;
+      return `<div class="flex items-center justify-between px-4 py-2.5 ${vi < videos.length-1 ? 'border-b border-outline-variant/30' : ''}">
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-sm ${assistiu ? 'text-secondary' : 'text-outline'}" ${assistiu ? "style=\"font-variation-settings:'FILL' 1\"" : ''}>
+            ${assistiu ? 'check_circle' : 'radio_button_unchecked'}
           </span>
-        </td>`;
-      }
-      return `<td class="text-center py-3 px-3">
-        <span class="inline-flex items-center gap-1 text-secondary font-label-md text-label-md">
-          <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">check_circle</span>${count}x
+          <span class="font-body-md text-body-md ${assistiu ? 'text-on-surface' : 'text-outline'}">
+            Aula ${vi+1} — ${v.titulo}
+          </span>
+        </div>
+        <span class="font-label-md text-label-md shrink-0 ml-4 ${assistiu ? 'text-secondary font-bold' : 'text-outline'}">
+          ${assistiu ? count+'x' : 'Não assistiu'}
         </span>
-      </td>`;
+      </div>`;
     }).join('');
 
-    const loginStr = u.ultimoLogin ? formatarDataRelatorio(u.ultimoLogin) : '—';
-    return `<tr class="hover:bg-surface-container-low transition-colors border-b border-outline-variant/30">
-      <td class="py-3 px-4">
-        <p class="font-label-md text-on-surface">${u.nome}</p>
-        <p class="font-label-sm text-on-surface-variant">Último login: ${loginStr}</p>
-      </td>
-      ${cells}
-      <td class="text-center py-3 px-3">
-        <span class="font-label-md text-label-md font-bold ${total > 0 ? 'text-primary' : 'text-outline'}">${total}</span>
-      </td>
-    </tr>`;
+    return `
+    <div class="border border-outline-variant rounded overflow-hidden">
+      <div onclick="toggleRelatorio(${idx})" class="flex items-center justify-between px-4 py-3 cursor-pointer hover:bg-surface-container-low transition-colors select-none">
+        <div class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-full ${bgAvatar} flex items-center justify-center font-label-md text-label-md font-bold shrink-0">${iniciais}</div>
+          <div>
+            <p class="font-label-md text-label-md text-primary">${u.nome}</p>
+            <p class="font-label-sm text-label-sm text-on-surface-variant">Último acesso: ${loginStr}</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 shrink-0 ml-4">
+          <span class="font-label-sm text-label-sm ${corProgresso}">${assistidos} de ${total} aulas</span>
+          <span id="rel-icon-${idx}" class="material-symbols-outlined text-outline transition-transform duration-200">expand_more</span>
+        </div>
+      </div>
+      <div id="rel-body-${idx}" class="hidden bg-surface-container-lowest border-t border-outline-variant/50">
+        ${linhasVideos}
+      </div>
+    </div>`;
   }).join('');
 
   container.innerHTML = `
-    <div class="overflow-x-auto">
-      <table class="w-full text-sm">
-        <thead>
-          <tr class="border-b-2 border-outline-variant">
-            <th class="text-left py-3 px-4 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Usuário</th>
-            ${thVideos}
-            <th class="text-center py-3 px-3 font-label-sm text-label-sm text-on-surface-variant uppercase tracking-wider">Total</th>
-          </tr>
-        </thead>
-        <tbody>${rows}</tbody>
-      </table>
-    </div>
+    <div class="space-y-2">${cards}</div>
     <p class="font-label-sm text-label-sm text-on-surface-variant mt-4 text-right">
-      Contabilizado cada vez que o usuário clica em uma aula para assistir.
+      Clique no usuário para ver o detalhe por aula.
     </p>`;
+}
+
+function toggleRelatorio(idx) {
+  const body = document.getElementById('rel-body-' + idx);
+  const icon = document.getElementById('rel-icon-' + idx);
+  if (!body) return;
+  const aberto = !body.classList.contains('hidden');
+  // Fecha todos
+  document.querySelectorAll('[id^="rel-body-"]').forEach(el => el.classList.add('hidden'));
+  document.querySelectorAll('[id^="rel-icon-"]').forEach(el => { el.textContent = 'expand_more'; el.style.transform = ''; });
+  // Abre o clicado (se estava fechado)
+  if (!aberto) {
+    body.classList.remove('hidden');
+    icon.textContent = 'expand_less';
+  }
 }
 
 function formatarDataRelatorio(timestamp) {
