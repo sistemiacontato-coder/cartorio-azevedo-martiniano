@@ -60,7 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
   renderMobileNav();
   renderHeaderBadge();
   renderAllViews();
-  navigateTo('home');
+  // Navega para a primeira aba visível (home pode estar desativada)
+  const cfg = getConfig();
+  const ordem = ['home','tutoriais','materiais','suporte'];
+  const primeira = ordem.find(p => cfg.menus[p]) || (isAdminOrMaster() ? 'admin' : 'home');
+  navigateTo(primeira);
 });
 
 // --- SIDEBAR DINÂMICA ---
@@ -231,14 +235,7 @@ function tutoriaisView() {
         <div class="h-1 w-full bg-surface-variant rounded-full mt-3 overflow-hidden"><div class="h-full bg-secondary rounded-full progress-animated" style="--progress:${pct}%"></div></div>
       </div>
       <ul class="divide-y divide-outline-variant/50">
-        ${aulas.map(a => `
-        <li data-lid="${a.id}" onclick="selectLesson(${a.id})" class="lesson-item flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-surface-container-low transition-colors ${a.id===ativa?.id?'lesson-active bg-surface-container-low border-l-[3px] border-l-secondary':''}">
-          <div class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${a.concluida?'bg-secondary/10 text-secondary':'bg-surface-container text-on-surface-variant'}">
-            <span class="material-symbols-outlined text-sm" ${a.concluida?'style="font-variation-settings:\'FILL\' 1"':''}>${a.concluida?'check_circle':'play_circle'}</span>
-          </div>
-          <div class="flex-1 min-w-0"><p class="lesson-title font-label-md text-label-md ${a.id===ativa?.id?'text-primary font-bold':'text-on-surface'} truncate">${a.titulo}</p></div>
-          ${a.concluida?'<span class="font-label-sm text-label-sm text-secondary">✓</span>':''}
-        </li>`).join('')}
+        ${renderLessonItems(aulas, ativa?.id)}
       </ul>
     </div>
   </div>`;
@@ -254,19 +251,23 @@ function selectLesson(id) {
   document.getElementById('vimeo-player').src = vimeoSrc(aula.url, false);
   document.getElementById('current-lesson-title').textContent = aula.titulo;
 
-  // Atualiza destaque dourado na lista
-  document.querySelectorAll('.lesson-item').forEach(li => {
-    const ativo = parseInt(li.dataset.lid) === id;
-    li.classList.toggle('lesson-active', ativo);
-    li.classList.toggle('bg-surface-container-low', ativo);
-    li.classList.toggle('border-l-[3px]', ativo);
-    li.classList.toggle('border-l-secondary', ativo);
-    const p = li.querySelector('.lesson-title');
-    if (p) { p.classList.toggle('text-primary', ativo); p.classList.toggle('font-bold', ativo); p.classList.toggle('text-on-surface', !ativo); }
-  });
+  // Atualiza destaque da lista re-renderizando só o <ul>
+  const ul = document.querySelector('#view-tutoriais ul');
+  if (ul) ul.innerHTML = renderLessonItems(data.tutoriais, id);
 
   const email = localStorage.getItem('userEmail');
   if (email) registrarVisualizacao(email, aula.id, aula.titulo);
+}
+
+function renderLessonItems(aulas, ativaId) {
+  return aulas.map(a => `
+    <li onclick="selectLesson(${a.id})" class="flex items-center gap-3 px-4 py-3 cursor-pointer hover:bg-surface-container-low transition-colors ${a.id===ativaId ? 'bg-surface-container-low border-l-[3px] border-l-secondary' : ''}">
+      <div class="w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${a.concluida?'bg-secondary/10 text-secondary':'bg-surface-container text-on-surface-variant'}">
+        <span class="material-symbols-outlined text-sm" ${a.concluida?'style="font-variation-settings:\'FILL\' 1"':''}>${a.concluida?'check_circle':'play_circle'}</span>
+      </div>
+      <div class="flex-1 min-w-0"><p class="font-label-md text-label-md ${a.id===ativaId ? 'text-primary font-bold' : 'text-on-surface'} truncate">${a.titulo}</p></div>
+      ${a.concluida?'<span class="font-label-sm text-label-sm text-secondary">✓</span>':''}
+    </li>`).join('');
 }
 
 // --- MATERIAIS ---
