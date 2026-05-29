@@ -540,16 +540,16 @@ async function atualizarRelatorio() {
       const vData = u.videos[String(v.id)];
       const count = vData ? (vData.count || 0) : 0;
       const assistiu = count > 0;
-      return `<div class="flex items-center justify-between px-4 py-2.5 ${vi < videos.length-1 ? 'border-b border-outline-variant/30' : ''}">
-        <div class="flex items-center gap-3">
-          <span class="material-symbols-outlined text-sm ${assistiu ? 'text-secondary' : 'text-outline'}" ${assistiu ? "style=\"font-variation-settings:'FILL' 1\"" : ''}>
+      return `<div class="flex items-center justify-between px-4 py-2 ${vi < videos.length-1 ? 'border-b border-outline-variant/30' : ''}">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-on-surface-variant" style="font-size:16px;${assistiu ? "font-variation-settings:'FILL' 1;" : ''}color:${assistiu ? '' : '#74777e'}">
             ${assistiu ? 'check_circle' : 'radio_button_unchecked'}
           </span>
-          <span class="font-body-md text-body-md ${assistiu ? 'text-on-surface' : 'text-outline'}">
+          <span class="font-label-md text-label-md ${assistiu ? 'text-on-surface' : 'text-outline'}">
             Aula ${vi+1} — ${v.titulo}
           </span>
         </div>
-        <span class="font-label-md text-label-md shrink-0 ml-4 ${assistiu ? 'text-secondary font-bold' : 'text-outline'}">
+        <span class="font-label-sm text-label-sm shrink-0 ml-4 ${assistiu ? 'text-secondary font-bold' : 'text-outline'}">
           ${assistiu ? count+'x' : 'Não assistiu'}
         </span>
       </div>`;
