@@ -117,7 +117,7 @@ function navigateTo(page) {
   document.querySelectorAll('.mobile-nav-link').forEach(l => { l.classList.remove('active'); l.classList.add('text-on-surface-variant'); });
   document.querySelectorAll(`.mobile-nav-link[data-page="${page}"]`).forEach(l => { l.classList.add('active'); l.classList.remove('text-on-surface-variant'); });
   window.scrollTo(0,0);
-  if (page === 'admin' && isMaster()) setTimeout(() => atualizarRelatorio(), 150);
+  if (page === 'admin' && isAdminOrMaster()) setTimeout(() => { atualizarListaUsuarios(); atualizarRelatorio(); }, 150);
 }
 
 // --- RENDER VIEWS ---

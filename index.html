@@ -266,7 +266,7 @@
         }
 
         // Login com validação
-        function handleLogin(e) {
+        async function handleLogin(e) {
             e.preventDefault();
             limparErro();
 
@@ -280,23 +280,34 @@
             btnText.textContent = 'Verificando...';
             spinner.classList.remove('hidden');
 
-            setTimeout(() => {
-                const listaAtual = JSON.parse(localStorage.getItem('cartorio_users') || JSON.stringify(USUARIOS));
-                const usuario = listaAtual.find(u => (u.email === email || u.usuario === email) && u.senha === senha);
-                if (usuario) {
-                    localStorage.setItem('userRole', usuario.role);
-                    localStorage.setItem('userEmail', usuario.email);
-                    localStorage.setItem('userName', usuario.nome);
-                    registrarLogin(usuario.email, usuario.nome);
-                    btnText.textContent = 'Acesso concedido!';
-                    setTimeout(() => { window.location.href = 'painel.html'; }, 600);
-                } else {
-                    btn.disabled = false;
-                    btnText.textContent = 'Acessar Portal';
-                    spinner.classList.add('hidden');
-                    mostrarErro('E-mail ou senha incorretos. Tente novamente.');
+            // Tenta buscar usuários do Firebase; cai no localStorage se offline
+            let listaAtual = null;
+            try {
+                const doFirebase = await carregarUsuariosFirebase();
+                if (doFirebase && doFirebase.length > 0) {
+                    listaAtual = doFirebase;
+                    localStorage.setItem('cartorio_users', JSON.stringify(doFirebase));
                 }
-            }, 1200);
+            } catch(_) {}
+
+            if (!listaAtual) {
+                listaAtual = JSON.parse(localStorage.getItem('cartorio_users') || JSON.stringify(USUARIOS));
+            }
+
+            const usuario = listaAtual.find(u => (u.email === email || u.usuario === email) && u.senha === senha);
+            if (usuario) {
+                localStorage.setItem('userRole', usuario.role);
+                localStorage.setItem('userEmail', usuario.email);
+                localStorage.setItem('userName', usuario.nome);
+                registrarLogin(usuario.email, usuario.nome);
+                btnText.textContent = 'Acesso concedido!';
+                setTimeout(() => { window.location.href = 'painel.html'; }, 600);
+            } else {
+                btn.disabled = false;
+                btnText.textContent = 'Acessar Portal';
+                spinner.classList.add('hidden');
+                mostrarErro('E-mail ou senha incorretos. Tente novamente.');
+            }
         }
     </script>
 </body>

@@ -408,17 +408,20 @@ function salvarUsuario(usuarioIdOriginal) {
   const usuario = isMasterUser ? original.usuario : document.getElementById('u_usuario').value.trim().toLowerCase();
   const role    = isMasterUser ? 'master' : document.getElementById('u_role').value;
 
+  const novoObj = { nome, usuario, email, senha, role };
+
   if (!usuarioIdOriginal) {
     if (usuarios.some(u => u.usuario === usuario)) { alert('Esse nome de usuário já existe.'); return; }
-    usuarios.push({ nome, usuario, email, senha, role });
+    usuarios.push(novoObj);
   } else {
     const idx = usuarios.findIndex(u => u.usuario === usuarioIdOriginal);
     if (idx < 0) return;
     if (usuario !== usuarioIdOriginal && usuarios.some(u => u.usuario === usuario)) { alert('Esse nome de usuário já existe.'); return; }
-    usuarios[idx] = { nome, usuario, email, senha, role };
+    usuarios[idx] = novoObj;
   }
 
   setUsuarios(usuarios);
+  salvarUsuarioFirebase(novoObj, usuarioIdOriginal || null);
   fecharModal();
   reloadApp();
   navigateTo('admin');
@@ -462,9 +465,19 @@ function excluirUsuario(usuarioId) {
   if (u.role === 'master') { alert('O usuário master não pode ser excluído.'); return; }
   if (!confirm(`Excluir o usuário "${u.nome}"? Esta ação não pode ser desfeita.`)) return;
   setUsuarios(usuarios.filter(x => x.usuario !== usuarioId));
+  excluirUsuarioFirebase(usuarioId);
   reloadApp();
   navigateTo('admin');
   mostrarToast('Usuário excluído.');
+}
+
+async function atualizarListaUsuarios() {
+  await inicializarUsuariosFirebase(USUARIOS_PADRAO);
+  const lista = await carregarUsuariosFirebase();
+  if (!lista || lista.length === 0) return;
+  localStorage.setItem('cartorio_users', JSON.stringify(lista));
+  const container = document.getElementById('admin-usuarios-list');
+  if (container) container.innerHTML = lista.map(u => usuarioAdminRow(u)).join('');
 }
 
 // --- RELATÓRIO DE VISUALIZAÇÕES ---

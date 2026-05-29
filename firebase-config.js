@@ -80,6 +80,61 @@ async function registrarVisualizacao(email, videoId, titulo) {
   }
 }
 
+// ---- GESTÃO DE USUÁRIOS NO FIREBASE ----
+
+async function carregarUsuariosFirebase() {
+  if (!_db) return null;
+  try {
+    if (_authReady) await _authReady;
+    const snap = await _db.collection('usuarios_sistema').orderBy('nome').get();
+    if (snap.empty) return null;
+    return snap.docs.map(d => d.data());
+  } catch (e) {
+    console.warn('[Firebase] Erro ao carregar usuários:', e.message);
+    return null;
+  }
+}
+
+async function inicializarUsuariosFirebase(lista) {
+  if (!_db) return;
+  try {
+    if (_authReady) await _authReady;
+    const snap = await _db.collection('usuarios_sistema').limit(1).get();
+    if (!snap.empty) return; // Já inicializado
+    const batch = _db.batch();
+    lista.forEach(u => {
+      batch.set(_db.collection('usuarios_sistema').doc(u.usuario), u);
+    });
+    await batch.commit();
+    console.log('[Firebase] Usuários inicializados.');
+  } catch (e) {
+    console.warn('[Firebase] Erro ao inicializar usuários:', e.message);
+  }
+}
+
+async function salvarUsuarioFirebase(u, idOriginal) {
+  if (!_db) return;
+  try {
+    if (_authReady) await _authReady;
+    if (idOriginal && idOriginal !== u.usuario) {
+      await _db.collection('usuarios_sistema').doc(idOriginal).delete();
+    }
+    await _db.collection('usuarios_sistema').doc(u.usuario).set(u);
+  } catch (e) {
+    console.warn('[Firebase] Erro ao salvar usuário:', e.message);
+  }
+}
+
+async function excluirUsuarioFirebase(usuarioId) {
+  if (!_db) return;
+  try {
+    if (_authReady) await _authReady;
+    await _db.collection('usuarios_sistema').doc(usuarioId).delete();
+  } catch (e) {
+    console.warn('[Firebase] Erro ao excluir usuário:', e.message);
+  }
+}
+
 // Carrega todos os dados para o relatório do master
 async function carregarRelatorio() {
   if (!_db) return null;
