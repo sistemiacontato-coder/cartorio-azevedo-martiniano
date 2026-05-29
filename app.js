@@ -9,13 +9,13 @@ const DADOS_PADRAO = {
     certificado: true
   },
   tutoriais: [
-    { id:1, titulo:'Aula 1', url:'https://player.vimeo.com/video/1196631790?h=25c111001b', concluida:false, material:'' },
-    { id:2, titulo:'Aula 2', url:'https://player.vimeo.com/video/1196631862?h=091602f7e6', concluida:false, material:'' },
-    { id:3, titulo:'Aula 3', url:'https://player.vimeo.com/video/1196631868?h=73b15f14ee', concluida:false, material:'' },
-    { id:4, titulo:'Aula 4', url:'https://player.vimeo.com/video/1196631864?h=1fa86deec3', concluida:false, material:'' },
-    { id:5, titulo:'Aula 5', url:'https://player.vimeo.com/video/1196631789?h=80a48d31e6', concluida:false, material:'' },
-    { id:6, titulo:'Aula 6', url:'https://player.vimeo.com/video/1196631788?h=78f50c8827', concluida:false, material:'' },
-    { id:7, titulo:'Aula 7', url:'https://player.vimeo.com/video/1196631791?h=0a05f1df13', concluida:false, material:'' }
+    { id:1, titulo:'Aula 1', url:'https://player.vimeo.com/video/1196631790?h=25c111001b', concluida:false, downloadAtivo:false, downloadTitulo:'', downloadUrl:'' },
+    { id:2, titulo:'Aula 2', url:'https://player.vimeo.com/video/1196631862?h=091602f7e6', concluida:false, downloadAtivo:false, downloadTitulo:'', downloadUrl:'' },
+    { id:3, titulo:'Aula 3', url:'https://player.vimeo.com/video/1196631868?h=73b15f14ee', concluida:false, downloadAtivo:false, downloadTitulo:'', downloadUrl:'' },
+    { id:4, titulo:'Aula 4', url:'https://player.vimeo.com/video/1196631864?h=1fa86deec3', concluida:false, downloadAtivo:false, downloadTitulo:'', downloadUrl:'' },
+    { id:5, titulo:'Aula 5', url:'https://player.vimeo.com/video/1196631789?h=80a48d31e6', concluida:false, downloadAtivo:false, downloadTitulo:'', downloadUrl:'' },
+    { id:6, titulo:'Aula 6', url:'https://player.vimeo.com/video/1196631788?h=78f50c8827', concluida:false, downloadAtivo:false, downloadTitulo:'', downloadUrl:'' },
+    { id:7, titulo:'Aula 7', url:'https://player.vimeo.com/video/1196631791?h=0a05f1df13', concluida:false, downloadAtivo:false, downloadTitulo:'', downloadUrl:'' }
   ],
   materiais: [
     { id:1, icon:'picture_as_pdf', titulo:'Manual de Autenticação de Documentos', desc:'Diretrizes completas sobre conferência e selagem de cópias reprográficas.', tipo:'PDF', tamanho:'2.4 MB' },
@@ -274,9 +274,7 @@ function tutoriaisView() {
         <div class="video-wrapper"><iframe id="vimeo-player" src="${ativa?vimeoSrc(ativa.url,false):''}" allow="autoplay;fullscreen;picture-in-picture" allowfullscreen></iframe></div>
         <div class="p-6">
           <h2 id="current-lesson-title" class="font-headline-lg text-headline-lg text-primary mb-4">${ativa?ativa.titulo:''}</h2>
-          <button class="inline-flex items-center gap-2 px-5 py-2.5 border border-secondary text-secondary font-label-md text-label-md rounded hover:bg-secondary hover:text-on-secondary transition-colors">
-            <span class="material-symbols-outlined text-sm">download</span>Material para Download
-          </button>
+          <div id="download-btn-container">${renderDownloadBtn(ativa)}</div>
         </div>
       </div>
     </div>
@@ -307,8 +305,20 @@ function selectLesson(id) {
   const ul = document.querySelector('#view-tutoriais ul');
   if (ul) ul.innerHTML = renderLessonItems(data.tutoriais, id);
 
+  // Atualiza botão de download
+  const dlContainer = document.getElementById('download-btn-container');
+  if (dlContainer) dlContainer.innerHTML = renderDownloadBtn(aula);
+
   // Inicia tracking: só registra após 30s de reprodução real
   setupVimeoTracking(aula.id, aula.titulo);
+}
+
+function renderDownloadBtn(aula) {
+  if (!aula || !aula.downloadAtivo || !aula.downloadUrl) return '';
+  const titulo = aula.downloadTitulo || 'Material para Download';
+  return `<a href="${aula.downloadUrl}" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-5 py-2.5 border border-secondary text-secondary font-label-md text-label-md rounded hover:bg-secondary hover:text-on-secondary transition-colors">
+    <span class="material-symbols-outlined text-sm">download</span>${titulo}
+  </a>`;
 }
 
 function renderLessonItems(aulas, ativaId) {

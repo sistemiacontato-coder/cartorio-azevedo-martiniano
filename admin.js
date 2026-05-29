@@ -237,11 +237,29 @@ function abrirModalVideo(id) {
       <select id="v_concluida" class="w-full border border-outline-variant rounded px-4 py-3 font-body-md text-body-md focus:border-primary outline-none">
         <option value="false" ${v&&!v.concluida?'selected':''}>Não</option><option value="true" ${v&&v.concluida?'selected':''}>Sim</option>
       </select></div>
+      <!-- DOWNLOAD -->
+      <div class="border border-outline-variant rounded p-4 space-y-3">
+        <div class="flex items-center justify-between">
+          <span class="font-label-md text-label-md text-on-surface">Botão de Download</span>
+          <label class="toggle-switch"><input type="checkbox" id="v_download_ativo" ${v&&v.downloadAtivo?'checked':''} onchange="toggleDownloadFields()"><span class="toggle-slider"></span></label>
+        </div>
+        <div id="v_download_fields" class="${v&&v.downloadAtivo?'':'hidden'} space-y-3 pt-1">
+          <div><label class="block font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">Título do botão</label>
+          <input id="v_download_titulo" value="${v&&v.downloadTitulo?v.downloadTitulo:'Material para Download'}" placeholder="Material para Download" class="w-full border border-outline-variant rounded px-4 py-3 font-body-md text-body-md focus:border-primary outline-none"></div>
+          <div><label class="block font-label-sm text-label-sm text-on-surface-variant mb-1 uppercase tracking-wider">URL do arquivo</label>
+          <input id="v_download_url" value="${v&&v.downloadUrl?v.downloadUrl:''}" placeholder="https://..." class="w-full border border-outline-variant rounded px-4 py-3 font-body-md text-body-md focus:border-primary outline-none"></div>
+        </div>
+      </div>
       <div class="flex gap-3 pt-2">
         <button type="submit" class="flex-1 py-2.5 bg-primary text-on-primary font-label-md text-label-md rounded hover:bg-inverse-surface transition-colors">Salvar</button>
         <button type="button" onclick="fecharModal()" class="flex-1 py-2.5 border border-outline-variant text-on-surface-variant font-label-md text-label-md rounded hover:bg-surface-container-low transition-colors">Cancelar</button>
       </div>
     </form>`);
+}
+
+function toggleDownloadFields() {
+  const ativo = document.getElementById('v_download_ativo').checked;
+  document.getElementById('v_download_fields').classList.toggle('hidden', !ativo);
 }
 
 function salvarVideo(id) {
@@ -250,7 +268,10 @@ function salvarVideo(id) {
     titulo: document.getElementById('v_titulo').value,
     url: document.getElementById('v_url').value,
     concluida: document.getElementById('v_concluida').value === 'true',
-    material: ''
+    material: '',
+    downloadAtivo: document.getElementById('v_download_ativo').checked,
+    downloadTitulo: document.getElementById('v_download_titulo').value,
+    downloadUrl: document.getElementById('v_download_url').value
   };
   if (id) {
     const idx = data.tutoriais.findIndex(t=>t.id===id);
