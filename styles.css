@@ -3,13 +3,14 @@
 }
 
 /* Sidebar nav states */
-.nav-link { color: #44474e; border-left: 4px solid transparent; }
+.nav-link { color: #9aa0ab; border-left: 4px solid transparent; transition: color 0.2s, background 0.2s; }
+.nav-link .nav-icon { font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24; }
 .nav-link:hover { color: #775a19; border-left-color: #775a19; }
 .nav-link.active {
   color: #775a19; border-left-color: #775a19;
   background: #f0f3ff; transform: scale(0.98);
 }
-.nav-link.active .nav-icon { font-variation-settings: 'FILL' 1; }
+.nav-link.active .nav-icon { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
 
 .mobile-nav-link { color: #44474e; }
 .mobile-nav-link.active { color: #775a19; }
