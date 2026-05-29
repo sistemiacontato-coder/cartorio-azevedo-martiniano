@@ -34,6 +34,8 @@ function getData() {
 function setData(d) { localStorage.setItem('cartorio_data', JSON.stringify(d)); }
 function getConfig() { return getData().config; }
 function isMaster() { return localStorage.getItem('userRole') === 'master'; }
+
+let _aulaAtivaId = null;
 function isAdministrador() { return localStorage.getItem('userRole') === 'administrador'; }
 function isAdminOrMaster() { const r = localStorage.getItem('userRole'); return r === 'master' || r === 'administrador'; }
 
@@ -109,9 +111,27 @@ function renderHeaderBadge() {
 
 // --- NAVEGAÇÃO ---
 function navigateTo(page) {
+  // Para todos os iframes ao navegar (impede vídeo continuar em background)
+  document.querySelectorAll('[id^="view-"] iframe').forEach(f => { f.src = 'about:blank'; });
+
   document.querySelectorAll('[id^="view-"]').forEach(v => v.classList.add('hidden'));
   const view = document.getElementById('view-' + page);
   if (view) { view.classList.remove('hidden'); view.classList.add('fade-in'); }
+
+  // Restaura o vídeo da view exibida (sem autoplay)
+  const data = getData();
+  if (page === 'tutoriais') {
+    const aula = _aulaAtivaId
+      ? data.tutoriais.find(a => a.id === _aulaAtivaId)
+      : (data.tutoriais.find(a => !a.concluida) || data.tutoriais[0]);
+    const player = document.getElementById('vimeo-player');
+    if (player && aula) player.src = aula.url + '?title=0&byline=0&portrait=0';
+  } else if (page === 'home') {
+    const primeiro = data.tutoriais[0];
+    const homeIframe = document.querySelector('#view-home iframe');
+    if (homeIframe && primeiro) homeIframe.src = primeiro.url + '?title=0&byline=0&portrait=0';
+  }
+
   document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
   document.querySelectorAll(`.nav-link[data-page="${page}"]`).forEach(l => l.classList.add('active'));
   document.querySelectorAll('.mobile-nav-link').forEach(l => { l.classList.remove('active'); l.classList.add('text-on-surface-variant'); });
@@ -215,6 +235,7 @@ function selectLesson(id) {
   const data = getData();
   const aula = data.tutoriais.find(a=>a.id===id);
   if (!aula) return;
+  _aulaAtivaId = id;
   document.getElementById('vimeo-player').src = aula.url+'?title=0&byline=0&portrait=0&autoplay=1';
   document.getElementById('current-lesson-title').textContent = aula.titulo;
   const email = localStorage.getItem('userEmail');
