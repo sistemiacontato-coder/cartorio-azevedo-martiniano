@@ -97,7 +97,7 @@ function adminView() {
     </div>
   </div>
 
-  `;
+  `;}
 
 // --- COMPONENTES ADMIN ---
 function toggleItem(id, label, checked) {
