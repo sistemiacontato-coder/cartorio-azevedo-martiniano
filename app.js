@@ -60,11 +60,11 @@ function renderSidebar() {
   let html = '';
   items.forEach(it => {
     if (!cfg.menus[it.page]) return;
-    html += `<a href="#" data-page="${it.page}" class="nav-link flex items-center gap-3 px-4 py-3 ml-4 rounded-l-lg font-label-md text-label-md transition-all duration-200">
+    html += `<a href="#" data-page="${it.page}" class="nav-link flex items-center gap-2 px-4 py-2 ml-4 rounded-l-lg font-label-md text-label-md transition-all duration-200">
       <span class="material-symbols-outlined nav-icon">${it.icon}</span>${it.label}</a>`;
   });
   if (isAdminOrMaster()) {
-    html += `<a href="#" data-page="admin" class="nav-link flex items-center gap-3 px-4 py-3 ml-4 rounded-l-lg font-label-md text-label-md transition-all duration-200 mt-4 border-t border-outline-variant pt-4">
+    html += `<a href="#" data-page="admin" class="nav-link flex items-center gap-2 px-4 py-2 ml-4 rounded-l-lg font-label-md text-label-md transition-all duration-200 mt-2 border-t border-outline-variant pt-2">
       <span class="material-symbols-outlined nav-icon">admin_panel_settings</span>Configurações</a>`;
   }
   nav.innerHTML = html;
